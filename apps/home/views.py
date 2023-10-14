@@ -92,9 +92,13 @@ def index(request):
     if average_age_man_dict["age__avg"] == "":
         average_age_man_dict["age__avg"] = 0
         average_age_man = round(float(average_age_man_dict["age__avg"]),2)
+    else:
+        average_age_man = round(float(average_age_man_dict["age__avg"]),2)
     average_age_woman_dict = Identification.objects.filter(genre='Femme').aggregate(Avg('age'))
     if average_age_woman_dict["age__avg"] == "":
         average_age_woman_dict["age__avg"] = 0
+        average_age_woman = round(float(average_age_woman_dict["age__avg"]),2)
+    else:
         average_age_woman = round(float(average_age_woman_dict["age__avg"]),2)
     
     atcd_avc = Antecedent.objects.filter(atcdfamavc='Presence AVC').count()
