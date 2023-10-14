@@ -1,0 +1,196 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Traitements {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">TRAITEMENTS</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">FORMULAIRE DE MISES À JOUR DES TRAITEMENTS</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:orange;font-size:25px;"><b>MISE À JOUR DES TRAITEMENT</b></div>
+						</div>
+						<form class="form-horizontal" action="/updatetraitement/{{ traitement.id }}" method="POST">
+							{% csrf_token %}
+							
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-md-6 col-lg-6">
+										
+										 
+											<div class="form-group">
+												<label for="motifcon">NUMERO DE DOSSIER *</label>
+												<input type="text" class="form-control" value ={{ traitement.traitnumdoss }} id="traitnumdoss" name="traitnumdoss" placeholder="Entrez le numero de dossier">
+											</div>
+											<div class="form-group">
+												<label for="plaintes">TRAITEMENT EN COURS</label>
+												<input type="text" class="form-control" value ="{{ traitement.traiteencours }}" id="traiteencours" name="traiteencours" placeholder="Entrez le traitement en cours">
+												
+											</div>
+											
+											<div class="form-group">
+												<label for="identification">CAT</label>
+												<input type="text" class="form-control" value ="{{ traitement.cat }}" id="cat" name="cat" placeholder="Entrez les CATs">
+												
+											</div>
+											<div class="form-group">
+												<label>PRESCRIPTION</label><br/>
+												<select class="form-control" id="prescription" name="prescription" multiple>
+													<option selected>{{ traitement.prescription }}</option>
+													<option>Azélastine</option>
+													<option>Dichlorhydrate de loratadine</option>
+													<option>Kétotifène</option>
+													<option>Olopatadine</option>
+													<option>Hypopigmentée</option>
+													<option>Naphazoline</option>
+													<option>Oxymétazoline</option>
+													<option>Tétryzoline</option>
+													<option>Gentamicine</option>
+													<option>Tobramycine</option>
+													<option>Ciprofloxacine</option>
+													<option>Ofloxacine</option>
+													<option>Levofloxacine</option>
+													<option>Moxifloxacine</option>
+													<option>Aciclovir</option>
+													<option>Ganciclovir</option>
+													<option>Idoxuridine</option>
+													<option>Valaciclovir</option>
+													<option>Chibro cadron</option>
+													
+													
+													
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>DUREE</label><br/>
+												<select class="form-control" id="duree" name="duree" multiple>
+													<option selected>{{ traitement.duree }}</option>
+													<option>1 Semaine</option>
+													<option>2 Semaines</option>
+													<option>3 Semaines</option>
+													<option>1 mois</option>
+													<option>2 mois</option>
+													<option>3 mois</option>
+													<option>4 mois</option>
+													<option>5 mois</option>
+													<option>6 mois</option>
+													<option>7 mois</option>
+													<option>8 mois</option>
+													<option>9 mois</option>
+													<option>10 mois</option>
+													<option>11 mois</option>
+													<option>1 ans</option>
+													
+													
+													
+												</select>
+											</div>
+										
+
+											
+										
+										
+									
+									</div>
+									<div class="col-md-6 col-lg-6">
+										<div class="form-group">
+											<label>CCL</label><br/>
+											<select class="form-control" id="ccl" name="ccl" multiple>
+												<option selected>Choisissez</option>
+												<option>{{traitement.ccl }}</option>
+												<option>Evolution Favorable</option>
+												<option>Evolution Non Favorable</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>SUIVI TRAITEMENT</label>
+											<select class="form-control" id="formGroupDefaultSelect" name="suivi_maladie" required>
+												<option selected>{{ traitement.suivi_maladie }}</option>
+												<option>Oui</option>
+												<option>Non</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="identification">RENDEZ-VOUS</label>
+											<input type="text" class="form-control"value="{{ traitement.suivi_maladie }}"  id="Tout_rdv" name="Tout_rdv" value ="{{ traitement.Toutrdv }}" placeholder="Entrez les Rdv">
+											
+										</div>
+										<div class="form-group">
+											<label>DOSE</label><br/>
+											<select class="form-control" id="dose" name="dose" multiple >
+												<option selected>Choisissez les doses</option>
+												
+												<option>{{ traitement.dose }}</option>
+												
+												<option>une à deux gouttes dans l'œil affecté, quatre fois par jour</option>
+												<option>une à deux gouttes dans l'œil affecté, quatre fois par jour</option>
+												<option>une à deux gouttes dans l'œil affecté, deux fois par jour</option>
+												<option>une à deux gouttes dans l'œil affecté, trois fois par jour</option>
+												<option>une à deux gouttes dans l'œil affecté, quatre à six fois par jour</option>
+												<option>une à cinq gouttes dans l'œil affecté, cinq fois par jour </option>
+											</select>
+										</div>
+
+									</div>
+								
+					
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-warning">Mise à  Jour</button>
+						</div>
+						
+						 
+	
+						 
+					</form>
+				
+						
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

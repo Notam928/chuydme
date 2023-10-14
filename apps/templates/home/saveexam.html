@@ -1,0 +1,790 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Examens {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">EXAMENS</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">ENREGISTRER LES EXAMENS DU PATIENT</a>
+					</li>
+				</ul>
+			</div>
+			  
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:#f35961;font-size:25px;"><b>EXAMENS DU PATIENT</b></div>
+						</div>
+						<form class="form-horizontal" action="createexam" method="POST" id="form">
+							{% csrf_token %}
+							 
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-md-6 col-lg-6">
+										{% for message in messages %}
+									<p style="color:#f35961;;font-size:20px;">{{ message}}</p>
+									    {% endfor %}
+                                        
+
+										<div class="form-group">
+											<p style="color:#f35961;;font-size:30px;">OEIL GAUCHE</p>
+											<label for="identification">ANNEXES</label><br>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexes" value="Centrees" class="selectgroup-input" >
+													<span class="selectgroup-button">Normale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexes" value="Non Centrees" class="selectgroup-input">
+													<span class="selectgroup-button">Anormale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexes" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+											
+										</div>
+
+
+										<div class="form-group">
+											<label>CHAMBRE ANTERIEURE(CA)</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 0" class="selectgroup-input" >
+													<span class="selectgroup-button">Calme et Profonde(Tyndall 0)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 0-1+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 0 - 1+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 1+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 1+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 2+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 2+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 3+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 3+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="Tyndall 4+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 4+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ca" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+										<div class="form-group">
+											<label>CORNÉE</label><br/>
+											<select class="form-control" id="cornee" name="cornee" required>
+												<option selected>--------------</option>
+												<option>Transparente</option>
+												<option>PRD fins Pigmentées en Inf</option>
+												<option>PRD fins Pigmentées en Sup</option>
+												<option>Transparente</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>IRIS</label><br/>
+											<select class="form-control" id="iris" name="iris" required>
+												<option selected>--------------</option>
+												<option>Normopigmentée</option>
+												<option>Hypopigmentée</option>
+												<option>Hyperpigmentée</option>
+												<option>Heterochromique</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>PUPILS</label><br/>
+											<label>(Peut selectioner plusieurs)</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Forme Ronde et Centree" class="selectgroup-input" >
+													<span class="selectgroup-button">Forme Ronde et Centrée</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Reflexe Photomoteur Present" class="selectgroup-input">
+													<span class="selectgroup-button">Reflexe Photomoteur(+)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Reflexe Photomoteur Absent" class="selectgroup-input">
+													<span class="selectgroup-button">Reflexe Photomoteur(-)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Forme Irreguliere" class="selectgroup-input">
+													<span class="selectgroup-button">Forme Irrégulière</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Couleur Noire" class="selectgroup-input">
+													<span class="selectgroup-button">Couleur Noire</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="Couleur Blanche" class="selectgroup-input">
+													<span class="selectgroup-button">Couleur Blanche</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupil" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>CRISTALLIN</label><br/>
+											<select class="form-control" id="cristallin" name="cristallin" required>
+												<option selected>--------------</option>
+												<option>Transparent</option>
+												<option>Opacifie</option>
+												<option>Liquefie</option>
+												<option>RAS</option>
+											</select>
+										</div> 
+
+										<div class="form-group">
+											<label>VITRÉ</label><br/>
+											<select class="form-control" id="vitre" name="vitre" required>
+												<option selected>--------------</option>
+												<option>Normal</option>
+												<option>Trouble du vitré</option>
+												<option>Transparent</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>FOND D'OEIL</label><br/>
+											<select class="form-control" id="retine" name="retine" required>
+												<option selected>--------------</option>
+												<option>Normal</option>
+												<option>Anormal</option>
+												
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label for="identification">ACUITÉ VISUEL(Sur 10)</label>
+											<input type="number" class="form-control" id="avog" name="avog" placeholder="Entrez l'acuite visuel oeil gauche">
+											
+										</div>
+										
+										<div class="form-group">
+											<label for="identification">PRÉSSION INTRA-OCULAIRE(En mmHg)</label>
+											<input type="number" class="form-control" step=0.01 id="piog" name="piog" placeholder="Entrez la pression intra-oculaire oeil gauche">
+											
+										</div>
+										<div class="form-group">
+											
+											<label for="identification"><b style="color:#f35961">RESULTATS EXAMENS DE REFRACTION</b></label><br>
+											<label for="identification">SPHERE(En Dioptrie)</label><br>
+											<input type="number" class="form-control" step=0.01 id="sphereog" name="sphereog" placeholder="Entrez la valeur de la sphere">
+									
+										</div>
+                                        <div class="form-group">
+											<label for="identification">CYLINDRE(En Dioptrie)</label>
+											<input type="number" class="form-control" step=0.01 id="cylindreog" name="cylindreog" placeholder="Entrez la valeur du cylindre">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">AXE(En Degré )</label>
+											<input type="number" class="form-control"  id="axeog" name="axeog" placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+
+										
+										<div class="form-group">
+											<label for="identification"><b style="color:#f35961">EXAMENS</b></label>
+											<label style="color:#f35961">(Peut selectioner plusieurs)</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Fond d'oeil" class="selectgroup-input" >
+													<span class="selectgroup-button">Fond d'oeil</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Pause du verre a 3 mirroirs" class="selectgroup-input">
+													<span class="selectgroup-button">Pause du verre a 3 mirroirs</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Gonioscopie" class="selectgroup-input">
+													<span class="selectgroup-button">Gonioscopie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Refractometrie Dilatee" class="selectgroup-input">
+													<span class="selectgroup-button">Refractometrie Dilatee</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Skiaskopie" class="selectgroup-input">
+													<span class="selectgroup-button">Skiaskopie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Skimer Test" class="selectgroup-input">
+													<span class="selectgroup-button">Schimer Test</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Test a la fluoresceine" class="selectgroup-input">
+													<span class="selectgroup-button">Test a la fluoresceine</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Lang Test" class="selectgroup-input">
+													<span class="selectgroup-button">Lang Test</span>
+												</label>
+												
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Bagolini test" class="selectgroup-input">
+													<span class="selectgroup-button">Bagolini Test</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Ishihara Test" class="selectgroup-input">
+													<span class="selectgroup-button">Ishihara Test</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Tonometrie" class="selectgroup-input">
+													<span class="selectgroup-button">Tonometrie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Pachymetrie" class="selectgroup-input">
+													<span class="selectgroup-button">Pachymetrie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Champ Visuel Automatique" class="selectgroup-input">
+													<span class="selectgroup-button">Champ Visuel Automatique</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Courbe PIO" class="selectgroup-input">
+													<span class="selectgroup-button">Courbe PIO</span>
+												</label>
+												
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="OCT" class="selectgroup-input">
+													<span class="selectgroup-button">OCT</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Biometrie" class="selectgroup-input">
+													<span class="selectgroup-button">Biometrie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Retinographie" class="selectgroup-input">
+													<span class="selectgroup-button">Retinographie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Angiographie a la Fluorescein" class="selectgroup-input">
+													<span class="selectgroup-button">Angiographie a la Fluorescenie</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Angiographie a l'indocyanine" class="selectgroup-input">
+													<span class="selectgroup-button">Angiographie a l'indocyanine</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Echographie de l'oeil" class="selectgroup-input">
+													<span class="selectgroup-button">Echographie de l'oeil</span>
+												</label>
+					
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="RX de L'orbite" class="selectgroup-input">
+													<span class="selectgroup-button">RX de l'orbite</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="ERG" class="selectgroup-input">
+													<span class="selectgroup-button">ERG</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="EOG" class="selectgroup-input">
+													<span class="selectgroup-button">EOG</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Bilan orthoptique" class="selectgroup-input">
+													<span class="selectgroup-button">Bilan orthoptique</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="NFS" class="selectgroup-input">
+													<span class="selectgroup-button">NFS</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="CRP" class="selectgroup-input">
+													<span class="selectgroup-button">CRP</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="HbA1c" class="selectgroup-input">
+													<span class="selectgroup-button">HbA1c</span>
+												</label>
+	
+												<label class="selectgroup-item">
+													<input type="checkbox" name="exam" id="exam" value="Glycemie a Jeun" class="selectgroup-input">
+													<span class="selectgroup-button">Glycemie a Jeun</span>
+												</label>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="identification">NUMERO DE DOSSIER *</label>
+											<input type="number" class="form-control" id="examnumdoss" name="examnumdoss" placeholder="Entrez le Numero de Dossier">
+										</div>
+										
+									
+									</div>
+								    
+									<div class="col-md-6 col-lg-6">
+										<div class="form-group">
+											<p style="color:#f35961;;font-size:30px;">OEIL DROIT</p>
+											<label for="identification">ANNEXES</label><br>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexesod" value="Centrees" class="selectgroup-input" >
+													<span class="selectgroup-button">Normale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexesod" value="Non Centrees" class="selectgroup-input">
+													<span class="selectgroup-button">Anormale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="annexesod" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+											
+										</div>
+
+
+
+
+										
+										<div class="form-group">
+											<label>CHAMBRE ANTERIEURE(CA)</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 0" class="selectgroup-input" >
+													<span class="selectgroup-button">Calme et Profonde(Tyndall 0)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 0-1+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 0 - 1+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 1+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 1+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 2+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 2+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 3+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 3+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="Tyndall 4+" class="selectgroup-input">
+													<span class="selectgroup-button">Tyndall 4+</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="caod" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label>CORNÉE</label><br/>
+											<select class="form-control" id="corneeod" name="corneeod" required>
+												<option selected>--------------</option>
+												<option>Transparente</option>
+												<option>PRD fins Pigmentées en Inf</option>
+												<option>PRD fins Pigmentées en Sup</option>
+												<option>Transparente</option>
+												<option>RAS</option>
+											</select>
+										</div>
+
+
+
+										<div class="form-group">
+											<label>IRIS</label><br/>
+											<select class="form-control" id="irisod" name="irisod" required>
+												<option selected>--------------</option>
+												<option>Normopigmentée</option>
+												<option>Hypopigmentée</option>
+												<option>Hyperpigmentée</option>
+												<option>Heterochromique</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>PUPILS</label><br/>
+											<label>(Peut selectioner plusieurs)</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Forme Ronde et Centree" class="selectgroup-input" >
+													<span class="selectgroup-button">Forme Ronde et Centrée</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Reflexe Photomoteur Present" class="selectgroup-input">
+													<span class="selectgroup-button">Reflexe Photomoteur(+)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Reflexe Photomoteur Absent" class="selectgroup-input">
+													<span class="selectgroup-button">Reflexe Photomoteur(-)</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Forme Irreguliere" class="selectgroup-input">
+													<span class="selectgroup-button">Forme Irrégulière</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Couleur Noire" class="selectgroup-input">
+													<span class="selectgroup-button">Couleur Noire</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="Couleur Blanche" class="selectgroup-input">
+													<span class="selectgroup-button">Couleur Blanche</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="pupilod" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>CRISTALLIN</label><br/>
+											<select class="form-control" id="cristallinod" name="cristallinod" required>
+												<option selected>--------------</option>
+												<option>Transparent</option>
+												<option>Liquefie</option>
+												<option>Opacifie</option>
+												<option>RAS</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>VITRÉ</label><br/>
+											<select class="form-control" id="vitreod" name="vitreod" required>
+												<option selected>--------------</option>
+												<option>Normal</option>
+												<option>Trouble du vitré</option>
+												<option>Transparent</option>
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label>FOND D'OEIL</label><br/>
+											<select class="form-control" id="retineod" name="retineod" required>
+												<option selected>--------------</option>
+												<option>Normal</option>
+												<option>Anormal</option>
+											</select>
+										</div>
+
+										
+
+										 
+										<div class="form-group">
+											<label for="identification">ACUITÉ VISUEL(Sur 10)</label>
+											<input type="number" class="form-control" id="avod" name="avod" placeholder="Entrez l'acuite visuel oeil droite">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">PRÉSSION INTRA-OCULAIRE(En mmHg)</label>
+											<input type="number" class="form-control" step=0.01 id="piod" name="piod" placeholder="Entrez pression intra-oculaire oeil droite">
+											
+										</div>
+
+										<div class="form-group">
+			
+											
+											<label for="identification">SPHERE(En Dioptrie)</label><br>
+											<input type="number" class="form-control" step=0.01 id="sphereod" name="sphereod" placeholder="Entrez la valeur de la sphere">
+									
+										</div>
+                                        <div class="form-group">
+											<label for="identification">CYLINDRE(En Dioptrie)</label>
+											<input type="number" class="form-control" step=0.01 id="cylindreod" name="cylindreod" placeholder="Entrez la valeur du cylindre">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">AXE(En Degré )</label>
+											<input type="number" class="form-control"  id="axeod" name="axeod" placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+										
+
+										<div class="form-group">
+											<label for="identification"><b style="color:#f35961">OCT<b></label><br>
+											<label for="identification">CD Valeur ODG |Taille Papille(en mm)</label>
+											<input type="number" class="form-control" step=0.01 id="cdvaleur" name="cdvaleur" placeholder="Entrez la taille de la papille">
+	
+										</div>
+										
+										<div class="form-group">
+											<label>INSPECTION ODG</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="inspection" value="Normale" class="selectgroup-input" >
+													<span class="selectgroup-button">Normale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="inspection" value="Anormale" class="selectgroup-input">
+													<span class="selectgroup-button">Anormale</span>
+												</label>
+	
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>REFLETS CORNÉENS ODG </label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="reflets" value="Centrees" class="selectgroup-input" >
+													<span class="selectgroup-button">Centrées</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="reflets" value="Non Centrees" class="selectgroup-input">
+													<span class="selectgroup-button">Non Centrées</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="reflets" value="RAS" class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+										<div class="form-group">
+											<label>OCULOMOTRICITÉ ODG</label><br/>
+											<select class="form-control" id="occulomotricite" name="occulomotricite" required>
+												<option selected>--------------</option>
+												<option>Pas de Limitations dans les champs du regard</option>
+												<option>Limitation des Mouvements Oculaires</option>
+												<option>Déviation Oculaire</option>
+												<option>Nystagmus</option>
+												<option>Vision Double</option>
+												<option>Protrusion des Yeux</option>
+											</select>
+										</div>
+
+									
+										
+										<div class="form-group">
+											<label>MACULA ODG</label><br/>
+											<select class="form-control" id="macula" name="macula" required>
+												<option selected>--------------</option>
+												<option>Normale</option>
+												<option>Ternie</option>
+												<option>Druse</option>
+												<option>Œdème</option>
+												<option>Hémorragique</option>
+											</select>
+										</div>
+                                        
+										<div class="form-group">
+											<label>PAPILLE ODG</label><br/>
+											<select class="form-control" id="papille" name="papille" required>
+												<option selected>--------------</option>
+												<option>Normale</option>
+												<option>Pal</option>
+												<option>Excavée</option>
+												<option>Œdème</option>
+											</select>
+										</div>
+
+										
+                                        
+
+										<div class="form-group">
+											<label for="identification">NOM DU MEDECIN</label>
+											<input type="text" class="form-control" id="nommedecin" name="nommedecin" placeholder="Entrez le Nom du Medecin">
+										</div>
+										<div class="form-group">
+											<label for="identification">NOM DU PATIENT</label>
+											<input type="text" class="form-control" id="nompatient" name="nompatient" placeholder="Entrez le Nom du Patient">
+										</div>
+                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										
+									</div>
+					                
+									
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-danger">Enregistrer</button>
+							<button class="btn btn-success" onclick="generatePDF()">Générer PDF</button>
+						</div>
+						
+						 
+	
+						 
+					</form>
+					
+						
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+              
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	
+	<script src="/static/assets/js/jspdf.umd.min.js"></script>
+	
+	<script>
+		function generatePDF() {
+			var form =document.getElementById('form')
+        	form.addEventListener('submit', function () {
+             // Prevent the default form submission behavior
+       	    event.preventDefault();
+			
+			// Get user input
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            var content = document.getElementById('nommedecin').value;
+			var content1 = document.getElementById('nompatient').value;
+			
+  			
+			
+			 
+
+            // Create a new jsPDF instance
+            var pdf = new jsPDF();
+
+
+			const margin = 10;
+			const pageWidth = doc.internal.pageSize.width - 2 * margin;
+			const pageHeight = doc.internal.pageSize.height;
+	
+			
+			// Add logo
+			const logoImg = new Image();
+			logoImg.src = './static/assets/img/Logo_chu.jpg'; // Replace with your logo image URL
+			pdf.addImage(logoImg, 'JPG', pageWidth - 185, 10, 40, 25);
+	        
+
+
+			// Get the current date
+			const currentDate = new Date();
+
+			// Format the date as a string (e.g., "MM/DD/YYYY" or "YYYY-MM-DD")
+			const formattedDate = currentDate.toLocaleDateString();
+
+            // Add header
+			pdf.setFont('poppins', 'bold');
+			pdf.text("CENTRE HOSPITALIER UNIVERSITAIRE DE YAOUNDE",50, 18);
+			pdf.setFont('poppins', 'normal');
+			
+	
+			// Add footer
+			pdf.text("Page " + doc.internal.getCurrentPageInfo().pageNumber, margin, pageHeight - 10);
+	        
+            // Add content to the PDF
+            pdf.text(63, 25, 'YAOUNDE UNIVERSITY TEACHING HOSPITAL');
+			pdf.text(80, 32, 'TEL: 23 31 21 03 - FAX/ 22 31 25 67');
+			pdf.setFontSize(16);
+			pdf.text(`Date: ${formattedDate}`,150,50);
+			pdf.text(36, 70, `Medecin: ${content}`);
+			pdf.text(36, 90, `M. ${content1}`);
+			pdf.setFontSize(18);
+
+			// Set the font style to bold
+			pdf.setFont('helvetica', 'bold');
+			pdf.text(75, 110, 'LISTE DES EXAMENS');
+			// Make text bold
+			
+            pdf.setFont('helvetica', 'normal');
+
+
+			
+			 // Add the selected options to the PDF document
+			 // Get the selected values from the multi-select
+			// Get all checkboxes with the name "exam" that are checked
+			var checkboxes = document.querySelectorAll('input[name="exam"]:checked');
+			var yPos = 120;
+			checkboxes.forEach(checkbox => {
+				pdf.text(`- ${checkbox.value}`, 30, yPos);
+				yPos += 15; // Adjust the vertical position for the next item
+			});
+        
+        
+
+            // Save or display the PDF
+            var pdfDataUri = pdf.output('datauristring');
+            document.getElementById('form').innerHTML = '<iframe width="100%" height="500" src="' + pdfDataUri + '"></iframe>';
+        });
+	}
+    </script>
+
+{% endblock javascripts %}

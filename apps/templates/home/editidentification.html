@@ -1,0 +1,294 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Identification {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">IDENTIFICATIONS</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">FORMULAIRE DE MISE À JOUR DES IDENTIFICATIONS </a>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" style="color:orange;font-size:25px;"><b>MISE À JOUR DES IDENTIFICATIONS<b></div>
+					</div>
+					<form  action="/updateidentification/{{ identification.id }}" method="POST">
+						{% csrf_token %}
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-10 col-lg-14">
+								<div class="form-group">
+									<label for="name">Numero Dossier </label>
+									<input type="number" class="form-control"  name="numerodossier"  value={{ identification.numerodossier }}>
+								
+								</div>
+								<div class="form-group">
+									<label for="name">Nom</label>
+									<input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom" value={{ identification.nom }}>
+									
+								</div>
+								<div class="form-group">
+									<label for="name">Prenom</label>
+									<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez le prenom" value={{ identification.prenom }}>
+									
+								</div>
+								
+								<div class="form-group">
+									<label>Age</label>
+									<select class="form-control" id="age" name="age" required>
+										<option selected>{{ identification.age }}</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+										<option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+										<option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+										<option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
+										<option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option ><option value="34">34</option>
+										<option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option>
+										<option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option>
+										<option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option>
+										<option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option>
+										<option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option>
+										<option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option>
+										<option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option>
+										<option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option>
+										<option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option>
+										<option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option>
+										<option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="86">86</option>
+										<option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option>
+										<option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option>
+										<option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option>
+										<option value="101">101</option><option value="102">102</option><option value="103">103</option><option value="104">104</option><option value="105">105</option>
+										<option value="106">106</option><option value="107">107</option><option value="108">108</option><option value="109">109</option><option value="110">110</option>
+									</select>
+								</div>
+								
+						
+								<div class="form-check">
+									<label>Genre</label><br/>
+									<label class="form-radio-label">
+										<input class="form-radio-input" type="radio" name="genre" value="Homme"  required{% if identification.genre == 'Homme' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Homme</span>
+									</label>
+									<label class="form-radio-label ml-3">
+										<input class="form-radio-input" type="radio" name="genre" value="Femme"  required{% if identification.genre == 'Femme' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Femme</span>
+									</label>
+								</div>
+								<div class="form-check">
+									<label>Etat Civil</label><br/>
+									<label class="form-radio-label">
+										<input class="form-radio-input" type="radio" name="etatcivil" value="Celibataire" required{% if identification.etatcivil == 'Celibataire' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Celibataire</span>
+									</label>
+									<label class="form-radio-label ml-3">
+										<input class="form-radio-input" type="radio" name="etatcivil" value="Veuf" required{% if identification.etatcivil == 'Veuf' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Veuf</span>
+									</label>
+									<label class="form-radio-label ml-3">
+										<input class="form-radio-input" type="radio" name="etatcivil" value="Marie" required{% if identification.etatcivil == 'Marie' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Marie</span>
+									</label>
+								</div>
+								
+								<div class="form-group">
+									<label for="name">Profession</label>
+									<input type="name" class="form-control" id="profession" name="profession" placeholder="Entrez La profession" value={{ identification.profession }}>
+	
+								</div>
+								<div class="form-group">
+									<label for="name">Date de Consultation</label>
+									<input type="date" class="form-control" id="dateconsultation" name="dateconsultation" placeholder="Entrez La date" value={{ identification.dateconsultation }}>
+	
+								</div>
+								
+								<div class="form-group">
+									<label for="name">Telephone</label>
+									<input type="telephone" class="form-control" id="telephone" name="telephone" placeholder="Entrez le telephone " value={{ identification.telephone }}>
+	
+								</div>
+								<div class="form-check">
+									<label>Assurer ?</label><br/>
+									<label class="form-radio-label">
+										<input class="form-radio-input" type="radio" name="assurer" value="Oui" required{% if identification.assurer == 'Oui' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Oui</span>
+									</label>
+									<label class="form-radio-label ml-3">
+										<input class="form-radio-input" type="radio" name="assurer" value="Non" required{% if identification.assurer == 'Non' %}  checked {% else %} '' {% endif %}>
+										<span class="form-radio-sign">Non</span>
+									</label>
+								</div>
+
+								<div class="form-group">
+									<label for="name">Assurance Social</label>
+									<input type="name" class="form-control" id="assurancesocial" name="assurancesocial"  placeholder="Entrez le numero d'assurance social " value={{ identification.assurancesocial }}>
+	
+								</div>
+								
+
+								<div class="form-group">
+									<label for="name">Nom de L'Assureur</label>
+									<input type="name" class="form-control" id="nomassureur" name="nomassureur"  placeholder="Entrez le nom de l'assureur " value={{ identification.nomassureur }}>
+								</div>
+
+								<div class="form-group">
+									<label for="name">Domicile</label>
+									<input type="name" class="form-control" id="domicile" name="domicile" placeholder="Entrez adresse" value={{ identification.domicile }}>
+								</div>
+
+								<div class="form-group">
+									<label>Region d'Origine</label>
+									<select class="form-control" id="formGroupDefaultSelect" name="regionorigine" required>
+										<option selected>{{ identification.regionorigine }}</option>
+										<option>Extreme Nord</option>
+										<option>Nord</option>
+										<option>Adamaoua</option>
+										<option>Littoral</option>
+										<option>Ouest</option>
+										<option>Nord Ouest</option>
+										<option>Centre</option>
+										<option>Est</option>
+										<option>Sud</option>
+										<option>Sud Ouest</option>
+									</select>
+								</div>
+
+
+								<div class="form-group">
+									<label for="statutmalade">Statut Malade</label>
+									<select class="form-control"  name="statutmalade" required>
+										<option selected>{{ identification.statutmalade }}</option>
+										<option>Choisissez Statut</option>
+										<option>Nouveau Malade</option>
+										<option>Ancien Malade</option>
+									</select>
+								</div>
+							</div>
+						
+			
+						</div>
+					</div>
+					<div class="card-action">
+						<button class="btn btn-warning">Mise à  Jour</button>
+					</div>
+					
+					  {% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							<strong style="font-size: 20px; color: 000000;">{{ message }}</strong> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{% endfor %}
+					  {% endif %}
+					  
+
+					 
+				</form>
+			
+					
+					
+					  <!-- Rest of your content goes here -->
+				
+			</div>
+				</div>
+			</div>
+			
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+
+			var message = django.messages.get('success');
+
+  // If there is a success message, display it.
+              if (message) {
+              alert(message);
+
+                            }
+		});
+	</script>
+
+
+{% endblock javascripts %}

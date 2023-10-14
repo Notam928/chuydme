@@ -1,0 +1,71 @@
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+    }
+    
+    @media (min-width: 1025px) {
+    .h-custom-2 {
+    height: 100%;
+    }
+    }
+
+
+.head1 {
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+}
+.head2 {
+    justify-content: center;
+    align-items: center;
+  
+
+}
+
+
+
+.container-fluid {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    min-height: 100vh; /* Ensure the container fills the entire viewport height */
+    background-color: #ADD8E6; /* Add a background color */
+}
+/* Apply Poppins font to headers */
+h1, h2, h3,h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    justify-content: center;
+    align-items: center;
+    
+    color:#032f88;
+   
+}
+
+
+
+/* Apply Papyrus font to paragraphs with a class of "papyrus-text" */
+.papyrus-text {
+    font-family: 'Papyrus', cursive;
+}
+
+
+    /* Style for the card */
+.card {
+    background-color: #fff; /* Card background color */
+    
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 50px;
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a box shadow */
+    width: 670px; /* Adjust card width as needed */
+    
+    
+}

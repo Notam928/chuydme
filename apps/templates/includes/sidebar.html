@@ -1,0 +1,218 @@
+		<!-- Sidebar -->
+		<div class="sidebar sidebar-style-2" data-background-color="dark2">	
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+
+				{% if request.user.is_authenticated %}	
+					
+					<div class="info">
+						<img src="/static/assets/img/Pr_Giles_Image3.jpg" alt="navbar brand" width="250" height="150" class="navbar-brand">
+						
+						<div class="clearfix"></div>
+
+						
+					</div>
+					
+					<ul class="nav nav-primary">
+						<li class="nav-item {% if 'index' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+								<i class="fas fa-chart-bar"></i>
+								<p>Tableau de bord</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="dashboard">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'home' %}">
+											<span class="sub-item">Dashboard</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Les Modules du Dossier Medical Ophtalmologique</h4>
+						</li>
+						<li class="nav-item {% if 'identification' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#identification">
+								<i class="fas fa-id-card"></i>
+								<p>Identification</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="identification">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createidentification' %}">
+											<span class="sub-item">Enregistrer les Identifications</span>
+										</a>
+									</li>
+									<li>
+										
+										<a href="{% url 'listidentification' %}">
+											<span class="sub-item">Listes des Identifications</span>
+										</a>
+									</li> 
+									  
+							</div>
+						</li>
+						<li class="nav-item {% if 'observation' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#observation">
+								<i class="fas fa-eye "></i>
+								<p>Observations</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="observation">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createobservation' %}" >
+											<span class="sub-item">Enregistrer Les Observations</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listobservation' %}">
+											<span class="sub-item">Listes des Observations</span>
+										</a>
+									</li>
+								
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'atcd' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#atcd">
+								<i class="fas fa-angle-left"></i>
+								<p>Antecedent</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="atcd">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createatcd' %}">
+											<span class="sub-item">Enregistrer les Antecedents</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listatcd' %}">
+											<span class="sub-item">Listes des Antecedents</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+
+
+
+
+						<li class="nav-item {% if 'enque' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#enque">
+								<i class="fas fa-search"></i>
+								<p>Enquetes Systeme</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="enque">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createenquetesystem' %}">
+											<span class="sub-item">Enregistrer les Enquetes Systeme</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listenquetesysteme' %}">
+											<span class="sub-item">Listes des Enquetes Systeme</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'exam' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#examens">
+								<i class="fas fa fa-stethoscope"></i>
+								<p>Examens</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="examens">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createexam' %}">
+											<span class="sub-item">Enregistrer les Examens </span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listexam' %}">
+											<span class="sub-item">Liste des Examens</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'diagnostic' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#diag">
+								<i class="fas fa-hospital"></i>
+								<p>Diagnostique</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="diag">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'creatediagnostique' %}">
+											<span class="sub-item">Enregistrer les Diagnostiques</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listdiagnostique' %}">
+											<span class="sub-item">Listes des Diagnostiques</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'traitement' in request.path %} active {% endif %}">
+							<a data-toggle="collapse" href="#traitement">
+								<i class="fas fa-medkit"></i>
+								<p>Traitement</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="traitement">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="{% url 'createtraitement' %}">
+											<span class="sub-item">Enregistrer les Traitements</span>
+										</a>
+									</li>
+									<li>
+										<a href="{% url 'listtraitement' %}">
+											<span class="sub-item">Listes des Traitements</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="nav-item {% if 'informationcomplet' in request.path %} active {% endif %}">
+							<a href="{% url 'affichertout' %}">
+								<i class="fas  fa-info-circle"></i>
+								<p>Information Consolider</p>
+								
+							</a>
+						</li>
+						<li class="nav-item {% if 'logout' in request.path %} active {% endif %}">
+							<a href="{% url 'logout' %}">
+								<i class="fas fa-sign-out-alt"></i>
+								<p>Logout</p>
+								
+							</a>
+						</li>
+						
+						
+						
+					</ul>
+			
+				
+				{% endif %}	
+				</div>
+			</div>
+		</div>
+        <!-- End Sidebar -->
+        

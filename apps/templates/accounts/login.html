@@ -1,0 +1,112 @@
+
+{% block title %}  {% endblock title %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+  <!-- CSS Files -->
+	<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/assets/css/atlantis.css">
+    <link rel="stylesheet" href="/static/assets/css/outlogin.css">
+
+
+{% endblock stylesheets %}
+	
+    {% block content %}
+
+   
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 text-black">
+                
+      
+              <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="head1"><h1>CENTRE HOSPITALIER UNIVERSITAIRE DE YAOUNDE</h1>
+                        <h3><center>YAOUNDE UNIVERSITY TEACHING HOSPITAL</center></h3>
+                        <h5><center><b>TEL: 22-31-21-03  FAX: 22-31-25-67</b></center></h5>
+                    
+                    </div>
+                    
+                    <div class="card">
+                        <div class="head2">
+                            <h5><center><b>CHUY/UTHY</b></center></h5>
+                          <center><img src="/static/assets/img/logo_chu.jpg" width="100" height="80"></center>
+                          
+                          
+                     
+                
+                        </div>
+                   
+                        <div class="card-header">
+                            
+                            <div class="card-title">
+                               
+                                {% if msg %}
+                                    <span class="text-danger">{{ msg | safe }}</span>
+                                {% else %}
+                                <span>
+                                   <h4> Ajouter vos informations </h4>
+                                </span>
+                                {% endif %}
+    
+                            </div>
+                        </div>
+    
+                        <form method="post" action="">
+    
+                            {% csrf_token %}
+    
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-10">
+    
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-user"></i>
+                                                    </span>
+                                                </div>
+                                                {{ form.username }}
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-lock"></i>
+                                                    </span>
+                                                </div>
+                                                {{ form.password }}
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                &nbsp; &nbsp;
+                                <span>Administrator ?</span> Please <a href="{% url 'register' %}" >Register Here</a>
+                            </div>
+    
+                        </form>
+    
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+      
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+              <img src="/static/assets/img/Pr_Giles_Image5.png"
+                alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+            </div>
+          </div>
+        </div>
+    {% endblock %}

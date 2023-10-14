@@ -1,0 +1,342 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Traitements {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">TRAITEMENTS</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">FORMULAIRE DU TRAITEMENTS DU PATIENT</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:#f35961;font-size:25px;"><b>TRAITEMENTS DU PATIENT</b></div>
+						</div>
+						<form class="form-horizontal" action="createtraitement" method="POST" id="form">
+							{% csrf_token %}
+							
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-md-6 col-lg-6">
+										{% for message in messages %}
+									<p style="color:red;font-size:20px;">{{ message}}</p>
+									{% endfor %}
+										 
+											<div class="form-group">
+												<label for="motifcon">NUMERO DE DOSSIER *</label>
+												<input type="number" class="form-control" id="traitnumdoss" name="traitnumdoss" placeholder="Entrez le numero de dossier">
+											</div>
+											<div class="form-group">
+												<label for="plaintes">TRAITEMENT EN COURS</label>
+												<input type="text" class="form-control" id="traiteencours" name="traiteencours" placeholder="Entrez le traitement en cours">
+												
+											</div>
+											<div class="form-group">
+												<label for="identification">CONDUITE À TENIR</label>
+												<input type="text" class="form-control" id="cat" name="cat" placeholder="Entrez les CATs">
+												
+											</div>
+											<div class="form-group">
+												<label>PRESCRIPTION</label><br/>
+												<select class="form-control" id="prescription" name="prescription" multiple>
+													<option selected>Peut selectioner plusieurs(ctrl+clique)</option>
+													<option>Azélastine</option>
+													<option>Dichlorhydrate de loratadine</option>
+													<option>Kétotifène</option>
+													<option>Olopatadine</option>
+													<option>Hypopigmentée</option>
+													<option>Naphazoline</option>
+													<option>Oxymétazoline</option>
+													<option>Tétryzoline</option>
+													<option>Gentamicine</option>
+													<option>Tobramycine</option>
+													<option>Ciprofloxacine</option>
+													<option>Ofloxacine</option>
+													<option>Levofloxacine</option>
+													<option>Moxifloxacine</option>
+													<option>Aciclovir</option>
+													<option>Ganciclovir</option>
+													<option>Idoxuridine</option>
+													<option>Valaciclovir</option>
+													<option>Chibro cadron</option>
+													
+													
+													
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label>DUREE</label><br/>
+												<select class="form-control" id="duree" name="duree"  multiple>
+													<option selected>Peut selectioner plusieurs(ctrl+clique)</option>
+													<option>1 Semaine</option>
+													<option>2 Semaines</option>
+													<option>3 Semaines</option>
+													<option>1 mois</option>
+													<option>2 mois</option>
+													<option>3 mois</option>
+													<option>4 mois</option>
+													<option>5 mois</option>
+													<option>6 mois</option>
+													<option>7 mois</option>
+													<option>8 mois</option>
+													<option>9 mois</option>
+													<option>10 mois</option>
+													<option>11 mois</option>
+													<option>1 ans</option>
+													
+												</select>
+											</div>
+											
+										
+										
+									
+									</div>
+
+
+									<div class="col-md-6 col-lg-6">
+										
+											<div class="form-group">
+												<label>SUIVI MALADIE</label><br/>
+												<div class="selectgroup selectgroup-pills">
+													<label class="selectgroup-item">
+														<input type="checkbox" name="suivi_maladie" value="Oui" class="selectgroup-input" >
+														<span class="selectgroup-button">Oui</span>
+													</label>
+													<label class="selectgroup-item">
+														<input type="checkbox" name="suivi_maladie" value="Non" class="selectgroup-input">
+														<span class="selectgroup-button">Non</span>
+													</label>
+													
+												</div>
+											</div>
+											
+											<div class="form-group">
+												<label>CCL</label><br/>
+												<select class="form-control" id="ccl" name="ccl">
+													<option selected>Choisissez</option>
+													<option>Evolution Favorable</option>
+													<option>Evolution Non Favorable</option>
+													<option>RAS</option>
+												</select>
+											</div>
+
+											<div class="form-group">
+												<label for="identification">PROCHAIN RENDEZ-VOUS</label>
+												<input type="text" class="form-control" id="Tout_rdv" name="Tout_rdv" placeholder="Entrez les Rdv">
+												
+											</div>
+											<div class="form-group">
+												<label>DOSE</label><br/>
+												<select class="selectgroup-item" id="dose" name="dose" multiple>
+													<option selected>Peut selectioner plusieurs(ctrl+clique)</option>
+													<option>une à deux gouttes dans l'œil affecté, quatre fois par jour</option>
+													<option>une à deux gouttes dans l'œil affecté, quatre fois par jour</option>
+													<option>une à deux gouttes dans l'œil affecté, deux fois par jour</option>
+													<option>une à deux gouttes dans l'œil affecté, trois fois par jour</option>
+													<option>une à deux gouttes dans l'œil affecté, quatre à six fois par jour</option>
+													<option>une à cinq gouttes dans l'œil affecté, cinq fois par jour </option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="identification">NOM DU MÉDECIN QUI PRESCRIT</label>
+												<input type="text" class="form-control" id="nommedecintr" name="nommedecintr" placeholder="Entrez le nom du médecin">
+												
+											</div>
+											
+											<div class="form-group">
+												<label for="identification">NOM DU PATIENT</label>
+												<input type="text" class="form-control" id="nompatienttr" name="nompatienttr" placeholder="Entrez le nom du patient">
+												
+											</div>
+										
+									
+									</div>
+								
+					
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-danger">Enregistrer</button>
+							<button class="btn btn-success" onclick="generatePDF()">Générer PDF</button>
+						</div>
+						
+						 
+	
+						 
+					</form>
+				
+						
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<script src="/static/assets/js/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+	<script>
+		function generatePDF() {
+			var form =document.getElementById('form')
+        	form.addEventListener('submit', function () {
+             // Prevent the default form submission behavior
+       	    event.preventDefault();
+			
+			// Get user input
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            var content = document.getElementById('nommedecintr').value;
+			var content1 = document.getElementById('nompatienttr').value;
+			
+  			
+			
+			 
+
+            // Create a new jsPDF instance
+            var pdf = new jsPDF();
+
+
+			const margin = 10;
+			const pageWidth = doc.internal.pageSize.width - 2 * margin;
+			const pageHeight = doc.internal.pageSize.height;
+	
+			
+			// Add logo
+			const logoImg = new Image();
+			logoImg.src = './static/assets/img/Logo_chu.jpg'; // Replace with your logo image URL
+			pdf.addImage(logoImg, 'JPG', pageWidth - 185, 10, 40, 25);
+	        
+
+
+			// Get the current date
+			const currentDate = new Date();
+
+			// Format the date as a string (e.g., "MM/DD/YYYY" or "YYYY-MM-DD")
+			const formattedDate = currentDate.toLocaleDateString();
+
+            // Add header
+			pdf.setFont('poppins', 'bold');
+			pdf.text("CENTRE HOSPITALIER UNIVERSITAIRE DE YAOUNDE",50, 18);
+			pdf.setFont('poppins', 'normal');
+			
+	
+			// Add footer
+			pdf.text("Page " + doc.internal.getCurrentPageInfo().pageNumber, margin, pageHeight - 10);
+	        
+            // Add content to the PDF
+            pdf.text(63, 25, 'YAOUNDE UNIVERSITY TEACHING HOSPITAL');
+			pdf.text(80, 32, 'TEL: 23 31 21 03 - FAX/ 22 31 25 67');
+			pdf.setFontSize(16);
+			pdf.text(`Date: ${formattedDate}`,150,50);
+			pdf.text(36, 70, `Medecin: ${content}`);
+			pdf.text(36, 90, `M. ${content1}`);
+			pdf.setFontSize(18);
+
+			// Set the font style to bold 
+			pdf.setFont('helvetica', 'bold');
+			pdf.text(75, 110, 'LISTE DES TRAITEMENTS');
+			// Make text bold
+			
+            pdf.setFont('helvetica', 'normal');
+
+
+			
+			 // Add the selected options to the PDF document
+			 // Get the selected values from the multi-select
+			// Get all checkboxes with the name "exam" that are checked
+			
+		// Create a table data array with headers
+		var data = [
+        ['Prescription', 'Dose', 'Duree']
+    ];
+
+    // An array of your three select elements
+    var selectElements = [
+        document.querySelector('select[name="prescription"]'),
+        document.querySelector('select[name="dose"]'),
+        document.querySelector('select[name="duree"]')
+    ];
+	var selectedOptions = [];
+
+  // Loop through each select element and collect selected options
+	selectElements.forEach(function(select) {
+		var options = select.selectedOptions;
+		for (var i = 0; i < options.length; i++) {
+			var optionValue = options[i].value;
+			var optionParts = optionValue.split(',');  // Assuming values are separated by commas
+			selectedOptions.push(optionParts);
+		}
+	});
+
+	
+
+  
+
+    // Define the column widths
+    var columnWidths = [60, 60, 60];
+
+	startX = 35;
+	startY = 125;
+	// Draw the table manually
+
+    // Draw the table using jsPDF-AutoTable
+    pdf.autoTable({
+        head: [['Prescription','Dose','Duree']],  // The first row contains headers
+        body: [[selectedOptions[0],selectedOptions[1],selectedOptions[2]]], // The rest of the table
+        theme: "plain",
+		startY: startY,
+        margin: { top: startY , left:startX},
+        styles: { fontSize: 12, fontStyle: 'normal' },
+        columnStyles: {
+            0: { cellWidth: columnWidths[0] },
+            1: { cellWidth: columnWidths[1] },
+            2: { cellWidth: columnWidths[2] }
+        },
+    });
+	
+        
+        
+
+            // Save or display the PDF
+            var pdfDataUri = pdf.output('datauristring');
+            document.getElementById('form').innerHTML = '<iframe width="100%" height="500" src="' + pdfDataUri + '"></iframe>';
+        });
+	}
+    </script>
+
+{% endblock javascripts %}
+

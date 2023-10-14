@@ -1,0 +1,342 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Observations {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">ENQUÊTE SYSTÉMIQUES</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">FORMULAIRE DES ENQUÊTES SYSTÉMIQUES DU PATIENT</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" style="color:#f35961;font-size:25px;"><b>ENQUÊTES SYSTÉMIQUES DU PATIENT</b></div>
+					</div>
+
+					<form class="form-horizontal" action="createenquetesystem" method="POST">
+						{% csrf_token %}
+						
+						<div class="card-body">
+							
+							<div class="row">
+								
+								<div class="col-md-6 col-lg-6">
+									{% for message in messages %}
+									<p style="color:red;font-size:20px;">{{ message}}</p>
+									{% endfor %} 
+									<div class="form-group">
+										<label><b>ENQUÊTE SYSTÉMIQUE - OPHTALMOLOGIE</b></label><br/>
+										<label>DOULEUR</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="douleur" value="Douleur Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="douleur" value="Douleur Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<label>LARMOIEMENT</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="larme" value="Larmoiement Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="larme" value="Larmoiement Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+
+									</div>
+								
+									
+
+									<div class="form-group">
+										<label>PICOTTEMENTS</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="picco" value="Piccotement Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="picco" value="Piccotement Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+											
+									</div>
+
+
+									<div class="form-group">
+										<label>PRURIT</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="prurit" value="Prurit Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="prurit" value="Prurit Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+							   
+									<div class="form-group">
+										<label>SENSATION DE GRAINS</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="grains" value="Sensation Grains Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="grains" value="Sensation Grains Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label>FLOU VISUEL</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="visuels" value="Flou Visuel Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="visuels" value="Flou visuel Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label>METAMORPHOPSIE</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="meta" value="Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name=" meta" value="Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label>PHOTOPSIES</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="photopsies" value="Photopsies Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="photopsies" value="Photopsies Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+	
+
+									<div class="form-group">
+										<label>MYODESOPSIE</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="myodesopsies" value="Myodesopsies Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="myodesopsies" value="Myodesopsies Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="numerodossier">NUMERO DOSSIER *</label>
+										<input type="number" class="form-control"  name="es_num_doss" placeholder="Entrez le numero de dossier">
+								
+									</div>
+								 </div>
+
+
+								 <div class="col-md-6 col-lg-6">
+									<div class="form-group">
+										<label>ENQUÊTE SYSTÉMIQUE - NEUROLOGIQUE</label><br/>
+										<label>CÉPHALÉES</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="Cephalees" value="Cephalees Presente" class="selectgroup-input" >
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="Cephalees" value="Cephalees Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>ENQUÊTE SYSTÉMIQUE - OTO - RHINO - LARYNGOLOGIE(ORL)</label><br/>
+										<label>OTALGIE</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="Otalgie" value="Otalgie Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="Otalgie" value="Otalgie Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>ACOUPHÈNES</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="acouphene" value="Acouphene Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="acouphene" value="Acouphene Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label>ENQUÊTE SYSTÉMIQUE - DIGESTIFS</label><br/>
+										<label>NAUSÉES</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="nausees" value="Nausees Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="nausees" value="Nausees Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label>VOMISSEMENT</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="vomissement" value="Vomissement Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="vomissement" value="Vomissement Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label>AUTRES ENQUÊTES SYSTÉMIQUE</label><br/>
+										<label>ASTHME</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="asthme" value="Asthme Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="asthme" value="Asthme Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>RHINORRHÉE</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="rhinorrhee" value="Rhinorrhee Presente" class="selectgroup-input">
+												<span class="selectgroup-button">Presente</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="rhinorrhee" value="Rhinorrhee Absente" class="selectgroup-input">
+												<span class="selectgroup-button">Absente</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="numerodossier">AUTRES ES</label>
+										<input type="text" class="form-control"  name="autrees" placeholder="Entrez d'autre ES">
+								
+									</div>
+									
+
+								</div>
+
+                                  
+
+                                 
+
+
+
+							
+				
+							</div>
+						</div>
+					<div class="card-action">
+						<button class="btn btn-danger">Enregistrer</button>
+		
+					</div>
+					
+					 
+
+					 
+				</form>
+			
+					
+					
+					  <!-- Rest of your content goes here -->
+				
+			</div>
+				</div>
+			</div>
+			
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

@@ -1,0 +1,357 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Antecedents {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">ANTÉCÉDENTS</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">FORMULAIRE DES ANTÉCÉDENTS DU PATIENTS</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="row">
+			<div class="col-md-10">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" style="color:#f35961;font-size:25px;"><b>ANTÉCÉDENTS DU PATIENT</b></div>
+					</div>
+					<form class="form-horizontal" action="/createatcd"  method="POST">
+						{% csrf_token %}
+						
+						<div class="card-body">
+							
+							<div class="row">
+								
+								<div class="col-md-6 col-lg-6">
+									{% for message in messages %}
+									<p style="color:#f35961;;font-size:20px;">{{ message}}</p>
+									{% endfor %}
+									<div class="form-group">
+										<label class="form-label">ANTECEDENTS PERSONNEL OPHTALMOLOGIQUE (ATCD PO)</label>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="atcdpo" value="Allergie Oculaire" class="selectgroup-input" >
+												<span class="selectgroup-button">Allergie Oculaire</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="atcdpo" value="Traumatisme Oculaire" class="selectgroup-input">
+												<span class="selectgroup-button">Traumatisme Oculaire</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="atcdpo" value="Chirugie Oculaire" class="selectgroup-input">
+												<span class="selectgroup-button">Chirugie Oculaire</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="atcdpo" value="Port de Lunettes" class="selectgroup-input">
+												<span class="selectgroup-button">Port de Lunettes</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="atcdpo" value="Cecite" class="selectgroup-input">
+												<span class="selectgroup-button">Cecite</span>
+											</label>
+											
+                                         
+											
+
+										</div>
+									</div>
+									
+
+									
+                                    
+									<div class="form-group">
+										<label class="form-label" ><b style="color:#f35961;;">ANTECEDENTS FAMILLIAUX OPHTALMOLOGIQUE</b></label>
+									</div>
+									<div class="form-check">
+										<label style="color:yellow;">1 - GLAUCOME</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfogl" value="Glaucome Presente">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfogl" value="Glaucome Absente">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label style="color:yellow;">2 - DMLA</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcddmla" value=" DMLA Present">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcddmla" value=" DMLA Absent">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label style="color:yellow;">3 - PORT DE LUNETTES</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="lunettes" value="Oui">
+											<span class="form-radio-sign">Oui</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="lunettes" value="Non">
+											<span class="form-radio-sign">Non</span>
+										</label>
+									</div>
+									<div class="form-group">
+										<label class="form-label" >ANTECEDENTS PERSONNELS GENERAUX ET MEDICAUX </label>
+									</div>
+								    
+									<div class="form-check">
+										<label style="color:yellow;">1 - ALLERGIES</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdaller" value="Allergie Presente">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdaller" value="Allergie Absente">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+                                    
+									<div class="form-check">
+										<label>2 - ANTECEDENT MEDICAUX</label><br/>
+										<label>A - CHIRUGIE OCULAIRE</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdco" value="deja effectuer"  checked="">
+											<span class="form-radio-sign">Deja effectuer</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdco" value="Pas encore effectuer">
+											<span class="form-radio-sign">Pas Effectuer</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>B - CECITE</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdce" value="Cecite Presente">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdce" value="Pas de Cecite">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>3 - PRISE DE MEDICAMENTS</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="medicaments" value="Oui" class="selectgroup-input">
+												<span class="selectgroup-button">OUI</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="medicaments" value="Non" class="selectgroup-input">
+												<span class="selectgroup-button">NON</span>
+											</label>
+										</div>
+									</div>
+									
+                                    
+                                    <div class="form-group">
+										<label for="atcdnumdoss">NUMERO DOSSIER *</label>
+										<input type="number" class="form-control" id="atcdnumdoss" name="atcdnumdoss"  placeholder="Entrez le numero de dossier ">
+		
+									</div>
+                               
+                                    
+                                    
+								</div>
+
+							
+
+							
+
+								<div class="col-md-6 col-lg-6">
+									 
+									<div class="form-check">
+										<label class="form-label"><b style="color:#f35961;;">ANTECEDENTS FAMILLIAUX MEDICAL</b></label><br/>
+										<label>1 - HTA </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfammedhta" value="HTA Present">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfammedhta" value="HTA Absent">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label>2 - DIABETE </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfamdiab" value="Presence Diabete">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfamdiab" value="Absence Diabete">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+                                    
+
+									<div class="form-check">
+										<label>3 - AVC </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfamavc" value="Presence AVC">
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfamavc" value="Absence AVC">
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+
+									
+
+                                   
+									<div class="form-group">
+										<label for="atcd"><b style="color:#f35961;;">ATCD SOCIO-ENVIRONNEMENTALE</b></label><br>
+										<label for="atcd">1 - FUMEUR</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="fumeur" value="Oui" class="selectgroup-input">
+												<span class="selectgroup-button">OUI</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="fumeur" value="Non" class="selectgroup-input">
+												<span class="selectgroup-button">NON</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="atcd">2 - ALCOOL</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="alcool" value="Oui" class="selectgroup-input">
+												<span class="selectgroup-button">OUI</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="alcool" value="Non" class="selectgroup-input">
+												<span class="selectgroup-button">NON</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="atcd">3 - TRAVAIL ORDINATEUR</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="ordinateur" value="Oui" class="selectgroup-input">
+												<span class="selectgroup-button">OUI</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="ordinateur" value="Non" class="selectgroup-input">
+												<span class="selectgroup-button">NON</span>
+											</label>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="atcd">4 - FEUX DE BOIS</label><br/>
+										<div class="selectgroup selectgroup-pills">
+											<label class="selectgroup-item">
+												<input type="checkbox" name="fdb" value="Oui" class="selectgroup-input">
+												<span class="selectgroup-button">OUI</span>
+											</label>
+											<label class="selectgroup-item">
+												<input type="checkbox" name="fdb" value="Non" class="selectgroup-input">
+												<span class="selectgroup-button">NON</span>
+											</label>
+										</div>
+									</div>
+                                    
+									<div class="form-group">
+										<label for="assurancesocial">AUTRES ATCDs</label>
+										<input type="text" class="form-control" id="comatcdfammed" name="comatcdfammed"  placeholder="Entrez les autres ATCDs">
+									</div>
+									<div class="form-group">
+										<label for="assurancesocial">COMMENTAIRE SUR LES ATCDs</label>
+										<input type="text" class="form-control" id="commafammedical" name="commafammedical"  placeholder="Entrez les commentaires sur les ATCDs">
+									</div>
+									
+									
+
+								</div>
+
+
+							</div>
+
+							
+
+
+                            
+
+
+						</div>
+
+
+
+
+						
+					<div class="card-action">
+						<button class="btn btn-danger">Enregistrer</button>
+					</div>
+					
+					 
+				</form>
+			
+					
+					
+					  <!-- Rest of your content goes here -->
+				
+			</div>
+				</div>
+			</div>
+			
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type= "text/javascript">
+		$(document).ready(function()
+		{
+		$('selectgroup-input').click(function()
+		{
+             var txt ="";
+			 $('.selectgroup-input:checked').each(function(){
+				txt+=$(this).val()+",";
+		});
+		    txt = txt.substring(0,txt.length-1);
+             $('#atcdpo').val(txt);
+		});
+
+		});
+	
+	</script> {% endcomment %}
+
+{% endblock javascripts %}

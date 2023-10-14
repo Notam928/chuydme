@@ -1,0 +1,379 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Antecedent {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">ANTÉCÉDENTS</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">FORMULAIRE DE MISES À JOUR DES ATCDS </a>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12 ">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title" style="color:orange;font-size:25px;"><b>MISE À JOUR DES ANTÉCÉDENTS</b></div>
+					</div>
+					<form  action="/updateatcd/{{ antecedent.id }}" method="POST">
+						{% csrf_token %}
+						<div class="card-body">
+							
+							<div class="row">
+								
+								<div class="col-md-6 col-lg-6">
+									 
+									<div class="form-group">
+										<label for="assurancesocial">ANTECEDENTS PERSONNEL OPHTALMOLOGIQUE (ATCD PO)</label>
+										<input type="text" class="form-control" id="atcdpo" name="atcdpo" value= "{{ antecedent.atcdpo }}"  placeholder="Entrez les ATCD PO">
+									</div>
+									
+
+									
+                                   
+                                    
+									<div class="form-group">
+										<label class="form-label" >ANTECEDENTS FAMILLIAUX OPHTALMOLOGIQUE</label>
+									</div>
+									<div class="form-check">
+										<label style="color:yellow;">1 - GLAUCOME</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfogl" value="Glaucome Presente" required{% if antecedent.atcdfogl == 'Glaucome Presente' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfogl" value="Glaucome Absente" required{% if antecedent.atcdfogl == 'Glaucome Absente' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label style="color:yellow;">2 - DMLA</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcddmla" value="DMLA Present" required{% if antecedent.atcddmla == 'DMLA Present' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcddmla" value="DMLA Absent" required{% if antecedent.atcddmla == 'DMLA Absent' %}  checked {% else %} '' {% endif %} >
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label style="color:yellow;">3 - PORT DE LUNETTES</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="lunettes" value="Oui" required{% if antecedent.lunettes == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Oui</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="lunettes" value="Non" required{% if antecedent.lunettes == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Non</span>
+										</label>
+									</div>
+									<div class="form-group">
+										<label class="form-label" >ANTECEDENTS PERSONNELS GENERAUX ET MEDICAUX </label>
+									</div>
+								    
+									<div class="form-check">
+										<label style="color:yellow;">1 - ALLERGIES</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdaller" value="Allergie Presente" required{% if antecedent.atcdaller == 'Allergie Presente' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdaller" value="Allergie Absente" required{% if antecedent.atcdaller == 'Allergie Absente' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+                                    
+									<div class="form-check">
+										<label>2 - ANTECEDENT MEDICAUX</label><br/>
+										<label>A - CHIRUGIE OCULAIRE</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdco" value="Deja effectuer" required{% if antecedent.atcdco == 'Deja effectuer' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Deja effectuer</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdco" value="Pas encore effectuer" required{% if antecedent.atcdco == 'Pas encore effectuer' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Pas Effectuer</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>B - CECITE</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdce" value="Cecite Presente" required{% if antecedent.atcdce == 'Cecite Presente' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdce" value="Pas de Cecite" required{% if antecedent.atcdce == 'Pas de Cecite' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>3 - PRISE DE MEDICAMENTS</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="medicaments" value="Oui" required{% if antecedent.medicaments == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">OUI</span>
+										</label> 
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="medicaments" value="Non" required{% if antecedent.medicaments == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">NON</span>
+										</label>
+									</div>
+									
+                                    
+
+									<div class="form-group">
+										<label for="atcdnumdoss">NUMERO DOSSIER</label>
+										<input type="number" class="form-control" id="atcdnumdoss" name="atcdnumdoss" value= {{ antecedent.atcdnumdoss }}  placeholder="Entrez le numero de dossier ">
+		
+									</div>
+								</div>
+
+							
+
+							
+
+								<div class="col-md-6 col-lg-6">
+									 
+									
+                                  
+                               
+                                    <div class="form-check">
+										<label class="form-label">ANTECEDENTS FAMILLIAUX MEDICAL </label><br/>
+										<label>1 - HTA </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfammedhta" value="HTA Present" required{% if antecedent.atcdfammedhta == 'HTA Present' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfammedhta" value="HTA Absent" required{% if antecedent.atcdfammedhta == 'HTA Absent' %}  checked {% else %} '' {% endif %} >
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+
+									<div class="form-check">
+										<label>2 - DIABETE </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfamdiab" value="Presence Diabete" required{% if antecedent.atcdfamdiab == 'Presence Diabete' %}  checked {% else %} '' {% endif %} >
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfamdiab" value="Absence Diabete" required{% if antecedent.atcdfamdiab == 'Absence Diabete' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+                                    
+
+									<div class="form-check">
+										<label>3 - AVC </label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="atcdfamavc" value="Presence AVC" required{% if antecedent.atcdfamavc == 'Presence AVC' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Presente</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="atcdfamavc" value="Absence AVC"  required{% if antecedent.atcdfamavc == 'Absence AVC' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">Absente</span>
+										</label>
+									</div>
+									
+									<div class="form-check">
+										<label for="atcdsocio">ATCD SOCIO-ENVIRONMENTALE</label><br/>
+										<label>1 - FUMEUR</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="fumeur" value="Oui" required{% if antecedent.fumeur == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">OUI</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="fumeur" value="Non"  required{% if antecedent.fumeur == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">NON</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>2 - ALCOOL</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="alcool" value="Oui" required{% if antecedent.alcool == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">OUI</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="alcool" value="Non"  required{% if antecedent.alcool == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">NON</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>3 - TRAVAIL SUR ORDINATEUR</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="ordinateur" value="Oui" required{% if antecedent.ordinateur == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">OUI</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="ordinateur" value="Non"  required{% if antecedent.ordinateur == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">NON</span>
+										</label>
+									</div>
+									<div class="form-check">
+										<label>4 - FEUX DE BOIS</label><br/>
+										<label class="form-radio-label">
+											<input class="form-radio-input" type="radio" name="fdb" value="Oui" required{% if antecedent.fdb == 'Oui' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">OUI</span>
+										</label>
+										<label class="form-radio-label ml-3">
+											<input class="form-radio-input" type="radio" name="fdb" value="Non"  required{% if antecedent.fdb == 'Non' %}  checked {% else %} '' {% endif %}>
+											<span class="form-radio-sign">NON</span>
+										</label>
+									</div>
+									<div class="form-group">
+										<label for="assurancesocial">AUTRES ATCDs</label>
+										<input type="text" class="form-control" id="comatcdfammed" name="comatcdfammed" value="{{ antecedent.comatcdfammed }}" placeholder="Entrez les autres ATCDs Familliaux Medical" >
+									</div>
+									
+									<div class="form-group">
+										<label for="commafammedical">COMMENTAIRE SUR ATCDs</label>
+										<input type="text" class="form-control" id="commafammedical" name="commafammedical" value="{{ antecedent.comatcdfammedical }}"  placeholder="Entrez les commentaire sur les ATCDs Familliaux Medical">
+									</div>
+
+									
+
+                                    
+
+									
+
+								</div>
+
+
+
+
+
+
+							</div>
+
+						
+
+
+						</div>
+
+
+
+
+
+
+
+					
+
+					<div class="card-action">
+						<button class="btn btn-warning">Mise à  Jour</button>
+					</div>
+					
+					  {% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							<strong style="font-size: 20px; color: 000000;">{{ message }}</strong> 
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{% endfor %}
+					  {% endif %}
+					  
+
+					 
+				</form>
+			
+					
+					
+					  <!-- Rest of your content goes here -->
+				
+			</div>
+				</div>
+			</div>
+			
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script >
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+
+			});
+
+			var message = django.messages.get('success');
+
+  // If there is a success message, display it.
+              if (message) {
+              alert(message);
+
+                            }
+		});
+	</script>
+
+
+{% endblock javascripts %}

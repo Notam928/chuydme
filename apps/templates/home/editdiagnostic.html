@@ -1,0 +1,105 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Diagnostique{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">DIAGNOSTIQUE</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">FORMULAIRE DE MISES À JOUR DES DIAGNOSTIQUES </a>
+					</li>
+				</ul>
+			</div>
+			
+            <div class="row">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:orange;font-size:25px;"><b>MISE À JOUR DES DIAGNOSTIQUES</b></div>
+						</div>
+						<form class="form-horizontal" action="/updatediagnostique/{{ diagnostique.id }}" method="POST">
+							{% csrf_token %}
+							
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-md-10 col-lg-14">
+										 
+										<div class="form-group">
+											<label for="motifcon">DIAGNOSTIQUE OEIL GAUCHE</label>
+											<input type="text" class="form-control" id="diagnostiqueog" name="diagnostiqueog" value={{ diagnostique.diagnostiqueog }}  placeholder="Entrez le Diagnostique de L'Oeil Gauche">
+										</div>
+										<div class="form-group">
+											<label for="plaintes">DIAGNOSTIQUE OEIL DROIT</label>
+											<input type="text" class="form-control" id="diagnostiqueod" name="diagnostiqueod"  value={{ diagnostique.diagnostiqueod }} placeholder="Entrez le Diagnostique de L'Oeil Droit">
+											
+										</div>
+										<div class="form-group">
+											<label for="poids">COMMENTAIRE DIAGNOSTIQUE</label>
+											<input type="text"  class="form-control" id="commentairediag" name="commentairediag" value={{ diagnostique.commentairediag}}  placeholder="Entrez les Commentaires sur le Diagnostique">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">NUMERO DE DOSSIER</label>
+											<input type="number" class="form-control" id="diagnumdoss" name="diagnumdoss" value={{ diagnostique.diagnumdoss}}  placeholder="Entrez le Numero de Dossier">
+											
+										</div>
+									
+									</div>
+								
+					
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-warning">Mise à  Jour</button>
+					
+						</div>
+						
+						 
+	
+						 
+					</form>
+				
+						
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

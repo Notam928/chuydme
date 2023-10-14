@@ -1,0 +1,370 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Formulaire Examens {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">EXAMENS</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">FORMULAIRE DE MISES À JOUR DES EXAMENS </a>
+					</li>
+				</ul>
+			</div>
+			  
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:orange;font-size:25px;"><b>MISE À JOUR DES EXAMENS</b></div>
+						</div>
+						<form class="form-horizontal" action="/updateexam/{{ exam.id }}" method="POST">
+							{% csrf_token %}
+							 
+							<div class="card-body">
+								
+								<div class="row">
+									
+									<div class="col-md-6 col-lg-6">
+										<p style="color:green;font-size:30px;">OEIL GAUCHE</p>
+
+										<div class="form-group">
+											
+											<label for="identification">ANNEXES</label><br>
+											<input type="text" class="form-control"  id="annexes" name="annexes" value="{{ exam.annexes }}">
+										</div>
+										<div class="form-group">
+											<label>CHAMBRE ANTERIEURE(CA)</label><br/>
+											<input type="text" class="form-control"  id="ca" name="ca" value="{{ exam.ca }}">
+										</div>
+										
+										<div class="form-group">
+											<label>CORNÉE</label><br/>
+											<select class="form-control" id="cornee" name="cornee" required>
+												<option selected>{{ exam.cornee }}</option>
+												<option>Transparente</option>
+												<option>PRD fins Pigmentées en Inf</option>
+												<option>PRD fins Pigmentées en Sup</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label>IRIS</label><br/>
+											<select class="form-control" id="iris" name="iris" required>
+												<option selected>{{ exam.iris }}</option>
+												<option>Normopigmentée</option>
+												<option>Hypopigmentée</option>
+												<option>Hyperpigmentée</option>
+												<option>Heterochromique</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="identification">PUPILS</label>
+											<input type="text" class="form-control" id="pupil" name="pupil" value="{{exam.pupil}}" placeholder="Decrivez nous comment est la papille">
+											
+										</div>
+										
+										<div class="form-group">
+											<label>CRISTALLIN</label><br/>
+											<select class="form-control" id="cristallin" name="cristallin" required>
+												<option selected>{{ exam.cristallin }}</option>
+												<option>Transparent</option>
+												<option>Opacifie</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label>VITRÉ</label><br/>
+											<select class="form-control" id="vitre" name="vitre" required>
+												<option selected>{{ exam.vitre }}</option>
+												<option>Liquefie</option>
+												<option>Transparent</option>
+												<option>Trouble du vitré</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label>FOND D'OEIL</label><br/>
+											<select class="form-control" id="retine" name="retine" required>
+												<option selected>{{ exam.retine }}</option>
+												<option>Normal</option>
+												<option>Anormal</option>
+											</select>
+										</div>
+										
+
+										<div class="form-group">
+											<label for="identification">ACUITÉ VISUEL(Sur 10)</label>
+											<input type="number" class="form-control" id="avog" name="avog" value = "{{ exam.avog }}" placeholder="Entrez l'acuite visuel oeil gauche">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">PRÉSSION INTRA-OCULAIRE(En mmHg)</label>
+											<input type="number" class="form-control"step=0.01 id="piog" name="piog" value = "{{ exam.piog }}" placeholder="Entrez la pression intra-oculaire oeil gauche">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">RESULTATS EXAMENS DE REFRACTION</label><br>
+											<label for="identification">SPHERE(En Dioptrie)</label><br>
+											<input type="number" class="form-control" step=0.01 id="sphereog" name="sphereog" value ="{{ exam.sphereog }}" placeholder="Entrez la valeur de la sphere">
+									
+										</div>
+										<div class="form-group">
+											<label for="identification">CYLINDRE(En Dioptrie)</label>
+											<input type="number" class="form-control" step=0.01 id="cylindreog" name="cylindreog" value = "{{ exam.cylindreog }}" placeholder="Entrez la valeur du cylindre">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">AXE(En Degré )</label>
+											<input type="number" class="form-control"  id="axeog" name="axeog" value={{ exam.axeog }} placeholder="Entrez la valeur de l'axe">
+						
+										</div>
+										<div class="form-group">
+											<label for="identification">INSPECTION ODG</label><br>
+											<input type="text" class="form-control"  id="inspection" name="inspection" value="{{ exam.inspection }}">
+										</div>
+
+										<div class="form-group">
+											<label>REFLETS CORNÉENS ODG</label><br/>
+											<input type="text" class="form-control"  id="reflets" name="reflets" value="{{ exam.reflets }}">
+										</div>
+										<div class="form-group">
+											<label>OCULOMOTRICITÉ ODG</label><br/>
+											<select class="form-control" id="occulomotricite" name="occulomotricite" required>
+												<option selected>{{ exam.occulomotricite}}</option>
+												<option>Pas de Limitations dans les champs du regard</option>
+												<option>Limitation des Mouvements Oculaires</option>
+												<option>Déviation Oculaire</option>
+												<option>Nystagmus</option>
+												<option>Vision Double</option>
+												<option>Protrusion des Yeux</option>
+											</select>
+										</div>
+
+                                        
+
+										
+
+
+
+										<div class="form-group">
+											<label for="identification">NUMERO DE DOSSIER *</label>
+											<input type="number" class="form-control" id="examnumdoss" name="examnumdoss" value = {{ exam.examnumdoss }} placeholder="Entrez le Numero de Dossier">
+										</div> 
+										
+
+										
+									
+									</div>
+								    
+									<div class="col-md-6 col-lg-6">
+										<p style="color:green;font-size:30px;">OEIL DROIT</p>
+										<div class="form-group">
+											<label for="identification">ANNEXES</label><br>
+											<input type="text" class="form-control"  id="annexesod" name="annexesod" value="{{ exam.annexesod }}">
+											
+										</div>
+										<div class="form-group">
+											<label>CHAMBRE ANTERIEURE DE L'OEIL DROIT(CA)</label><br/>
+											<input type="text" class="form-control"  id="caod" name="caod" value="{{ exam.caod }}">
+										</div>
+
+										
+										<div class="form-group">
+											<label>CORNÉE</label><br/>
+											<select class="form-control" id="corneeod" name="corneeod" required>
+												<option selected>{{ exam.corneeod }}</option>
+												<option>Transparente</option>
+												<option>PRD fins Pigmentées en Inf</option>
+												<option>PRD fins Pigmentées en Sup</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>IRIS</label><br/>
+											<select class="form-control" id="irisod" name="irisod" required>
+												<option selected>{{ exam.irisod }}</option>
+												<option>Normopigmentée</option>
+												<option>Hypopigmentée</option>
+												<option>Hyperpigmentée</option>
+												<option>Heterochromique</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="identification">PUPILS</label>
+											<input type="text" class="form-control" id="pupilod" name="pupilod" value="{{exam.pupilod}}" placeholder="Decrivez nous comment est la papille">
+											
+										</div>
+										<div class="form-group">
+											<label>CRISTALLIN</label><br/>
+											<select class="form-control" id="cristallinod" name="cristallinod" required>
+												<option selected>{{ exam.cristallinod }}</option>
+												<option>Transparent</option>
+												<option>Opacifie</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>VITRÉ</label><br/>
+											<select class="form-control" id="vitreod" name="vitreod" required>
+												<option selected>{{ exam.vitreod }}</option>
+												<option>Liquefie</option>
+												<option>Transparent</option>
+												<option>Trouble du vitré</option>
+												<option>RAS</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>FOND D'OEIL</label><br/>
+											<select class="form-control" id="retineod" name="retineod" required>
+												<option selected>{{ exam.retineod }}</option>
+												<option>Normal</option>
+												<option>Anormal</option>
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label for="identification">ACUITÉ VISUEL(Sur 10)</label>
+											<input type="number" class="form-control" id="avod" name="avod" value = "{{ exam.avod }}" placeholder="Entrez l'acuite visuel oeil droite">
+											
+										</div>
+										
+										<div class="form-group">
+											<label for="identification">PRÉSSION INTRA-OCULAIRE(En mmHg)</label>
+											<input type="number" class="form-control" step=0.01 id="piod" name="piod" value ="{{ exam.piod }}" placeholder="Entrez pression intra-oculaire oeil droite">
+											
+										</div>
+										
+                                        
+										
+										<div class="form-group">
+			
+											<label for="identification">SPHERE(En Dioptrie)</label><br>
+											<input type="number" class="form-control" step=0.01 id="sphereod" name="sphereod" value ="{{ exam.sphereod }}" placeholder="Entrez la valeur de la sphere">
+									
+										</div>
+                                        <div class="form-group">
+											<label for="identification">CYLINDRE(En Dioptrie)</label>
+											<input type="number" class="form-control" step=0.01 id="cylindreod" name="cylindreod" value ="{{ exam.cylindreod }}" placeholder="Entrez la valeur du cylindre">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">AXE(En Degré )</label>
+											<input type="number" class="form-control"  id="axeod" name="axeod" value ={{ exam.axeod }} placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+										
+
+										
+
+
+										
+
+
+										
+										 
+                                        <div class="form-group">
+											<label>PAPILLE ODG</label><br/>
+											<select class="form-control" id="papille" name="papille" required>
+												<option selected>{{ exam.papille}}</option>
+												<option>Normale</option>
+												<option>Pal</option>
+												<option>Excavée</option>
+												<option>Œdème</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="identification">OCT</label><br>
+											<label for="identification">CD Valeur ODG|Taille Papille(en mm)</label>
+											<input type="number" class="form-control" step=0.01 id="cdvaleur" name="cdvaleur" value={{ exam.cdvaleur }}>
+	
+										</div>
+										<div class="form-group">
+											<label for="identification">EXAMENS</label>
+											<input type="text" class="form-control" id="exam" name="exam" value = "{{ exam.exam }}">
+										</div>
+										
+										<div class="form-group">
+											<label>MACULA ODG</label><br/>
+											<select class="form-control" id="macula" name="macula" required>
+												<option selected>{{ exam.macula }}</option>
+												<option>Normale</option>
+												<option>Ternie</option>
+												<option>Druse</option>
+												<option>Œdème</option>
+												<option>Hémorragique</option>
+											</select>
+										</div>
+										
+
+										
+										
+											
+										
+
+									</div>
+					                
+									
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-warning">Mise à  Jour</button>
+						</div>
+						
+						 
+	
+						 
+					</form>
+				
+						
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+              
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+
+{% endblock javascripts %}

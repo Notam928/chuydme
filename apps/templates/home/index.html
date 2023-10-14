@@ -1,0 +1,825 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+			
+	<div class="content">
+		<div class="panel-header bg-primary-gradient">
+			<div class="page-inner py-5">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+					<div>
+						<h2 class="text-white pb-2 fw-bold">Dashboard</h2>
+						<h5 class="text-white op-7 mb-2">Database Overall Analysis</h5>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-6">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">STATISTIQUE DESCRIPTIVE</div>
+							<div class="card-category">                                                   </div>
+							
+							<div class="row">
+							
+
+							<div class="col-sm-6 col-md-6">
+								<div class="card card-stats card-primary card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="icon-pie-chart"></i>
+												</div>
+											</div>
+										    <div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">PROPORTION</p>
+													<h4 class="card-title">M: {{ propor_homme}} %</h4>
+													<h4 class="card-title">F: {{ propor_femme}} %</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+							</div>
+							
+							<div class="col-sm-6 col-md-6">
+								<div class="card card-stats card-secondary card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="icon-pie-chart"></i>
+												</div>
+											</div>
+										    <div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">NOUVEAU CAS</p>
+													<h4 class="card-title">M: {{ propor_homme_nc}} %</h4>
+													<h4 class="card-title">F: {{ propor_femme_nc}} %</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+							</div>
+							
+
+							<div class="col-sm-6 col-md-6">
+								<div class="card card-stats card-success card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="flaticon-users"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">AGE MOYEN</p>
+													<h4 class="card-title">M: {{average_age_man}}</h4>
+													<h4 class="card-title">F: {{average_age_woman}}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">ATCD-AVC</h6>
+										<h3 class="fw-bold">{{ atcd_avc }}</h3>
+									</div>
+									
+								</div>
+
+								
+								
+							</div>
+
+
+							<div class="col-sm-6 col-md-6">
+								<div class="card card-stats card-danger card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="flaticon-users"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">AGE MIN-MAX</p>
+													<h4 class="card-title">MAX: {{ Age.max_ }}</h4>
+													<h4 class="card-title">MIN: {{ Age.min_ }}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">ATCD-DIABETE</h6>
+										<h3 class="fw-bold">{{ atcd_diab }}</h3>
+									</div>
+									
+								</div>
+
+							</div>
+                           
+								
+							
+
+
+
+
+
+
+						</div>
+
+
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">ANALYSE DISCRETE(NOMBRE DE PATIENTS)</div>
+							<div class="row py-3">
+								<div class="col-md-4 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-primary op-6">DIAGNOSTIQUER</h6>
+										<h3 class="fw-bold">{{ total_diag }}</h3>
+									</div>
+									<div>
+										<h6 class="fw-bold text-uppercase text-primary op-6">CONSULTER</h6>
+										<h3 class="fw-bold">{{ identification_count }}</h3>
+									</div>
+									
+								</div>
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">SUIVI</h6>
+										<h3 class="fw-bold">{{ total_suivi }}</h3>
+									</div>
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">EVOLUTION FAVORABLE</h6>
+										<h3 class="fw-bold">{{ total_evo}}</h3>
+									</div>
+								</div>
+
+								<div class="col-md-4 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-warning op-8">AYANT FLOU VISUEL</h6>
+										<h3 class="fw-bold">{{ vis }}</h3>
+									</div>
+									<div>
+										<h6 class="fw-bold text-uppercase text-danger op-8">AYANT UNE OTALGIE</h6>
+										<h3 class="fw-bold">{{ otal }}</h3>
+									</div>
+								</div>
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-warning op-8">AYANT SENSATION GRAINS</h6>
+										<h3 class="fw-bold">{{ sens }}</h3>
+									</div>
+									<div>
+										<h6 class="fw-bold text-uppercase text-danger op-8">AYANT UNE ACOUPHENE</h6>
+										<h3 class="fw-bold">{{ aco }}</h3>
+									</div>
+									
+									
+								</div>
+								<div class="col-md-4 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">CECITE ATCD FAM</h6>
+										<h3 class="fw-bold">{{ cecite }}</h3>
+									</div>
+									
+								</div>
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-info op-8">GLAUCOME ATCD FAM</h6>
+										<h3 class="fw-bold">{{ glau }}</h3>
+									</div>
+									
+								</div>
+								<div class="col-md-4 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">ATCD-HTA</h6>
+										<h3 class="fw-bold">{{ atcd_hta }}</h3>
+									</div>
+									
+								</div>
+								<div class="col-md-8 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-info op-8">ATCD-ALLERGIE</h6>
+										<h3 class="fw-bold">{{ aller }}</h3>
+									</div>
+									
+								</div>
+								
+								
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				
+					<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">PROPORTION DIAGNOSTIQUES OEIL DROIT</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="pieChart" style="width: 50%; height: 50%"></canvas>
+									</div>
+								</div>
+							</div>
+								
+					</div>
+					
+				
+				
+					<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">DIAGNOSTIQUES OEIL GAUCHE</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="barChart" style="width: 50%; height: 50%"></canvas>
+									</div>
+								</div>
+							</div>
+					</div>
+
+				
+				
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">NOMBRE NOUVEAU-ANCIEN MALADE</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="barChart2" style="width: 50%; height: 50%"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">ACUITÉ VISUEL(MIN , MOY, MAX)</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="barChart3" style="width: 50%; height: 50%"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">PRÉSSION INTRA-OCULAIRE(MIN, MOY, MAX)</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="barChart4" style="width: 50%; height: 50%"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+                
+
+
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">PROPORTION PROFESSION</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="pieChart1" style="width: 50%; height: 50%"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+						
+
+				<div class="col-md-6">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">SPHERE , CYLINDRE (OEIL GAUCHE VS OEIL DROIT)</div>
+							</div>
+							<div class="card-body">
+								<div class="chart-container">
+									<canvas id="scatterChart"></canvas>
+								</div>
+							</div>
+						</div>		
+						
+				
+			    </div>
+
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">FREQUENCE CHAMBRE ANTERIEURE</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="barChart5" style="width: 50%; height: 50%"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+
+
+
+				
+				
+
+
+				
+			</div>
+
+			
+			
+
+
+
+
+
+			
+
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+
+    
+	<script>
+		
+		
+		pieChart = document.getElementById('pieChart').getContext('2d'),
+		pieChart1 = document.getElementById('pieChart1').getContext('2d'),
+	    scatterChart = document.getElementById('scatterChart').getContext('2d'),
+	
+	
+		
+		
+		
+		Circles.create({
+			id:'circles-1',
+			radius:45,
+			value:60,
+			maxValue:100,
+			width:7,
+			text: 5,
+			colors:['#f1f1f1', '#FF9E27'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		var dataLength = {{ left_eye_sphere|length|safe }};
+
+        // Generate labels dynamically based on the number of data points
+        var labels = [];
+        for (var i = 1; i <= dataLength; i++) {
+            labels.push("P" + i);
+        }
+
+		
+        var myscatterChart = new Chart(scatterChart, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Left Eye - Sphere",
+                        data: {{ left_eye_sphere|safe }},
+						backgroundColor : "blue",
+                        borderColor: "blue",
+                        fill: false,
+                    },
+                    {
+                        label: "Right Eye - Sphere",
+                        data: {{ right_eye_sphere|safe }},
+						backgroundColor : "red",
+                        borderColor: "red",
+                        fill: false,
+                    },
+                    {
+                        label: "Left Eye - Cylinder",
+                        data: {{ left_eye_cylinder|safe }},
+						backgroundColor : "green",
+                        borderColor: "green",
+                        fill: false,
+                    },
+                    {
+                        label: "Right Eye - Cylinder",
+                        data: {{ right_eye_cylinder|safe }},
+						backgroundColor : "orange",
+                        borderColor: "orange",
+                        fill: false,
+                    },
+                ],
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            },
+        });
+		
+        
+		var myPieChart = new Chart(pieChart, {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: {{ frequenciesog|safe }},
+					backgroundColor :["#1d7af3","#f3545d","#fdaf4b"],
+					borderWidth: 0
+				}],
+				labels: {{ labelsog|safe }}, 
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position : 'bottom',
+					labels : {
+						fontColor: 'rgb(154, 154, 154)',
+						fontSize: 11,
+						usePointStyle : true,
+						padding: 20
+					}
+				},
+				pieceLabel: {
+					render: 'percentage',
+					fontColor: 'white',
+					fontSize: 14,
+				},
+				tooltips: false,
+				layout: {
+					padding: {
+						left: 20,
+						right: 20,
+						top: 20,
+						bottom: 20
+					}
+				}
+			}
+		})
+
+
+		var myPieChart1 = new Chart(pieChart1, {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: {{ frequencies_prof|safe }},
+					backgroundColor :["#fa8072","#1d7af3","#f3545d","#fdaf4b"],
+					borderWidth: 0
+				}],
+				labels: {{ labels_prof|safe }}, 
+			},
+			options : {
+				responsive: true, 
+				maintainAspectRatio: false,
+				legend: {
+					position : 'bottom',
+					labels : {
+						fontColor: 'rgb(154, 154, 154)',
+						fontSize: 11,
+						usePointStyle : true,
+						padding: 20
+					}
+				},
+				pieceLabel: {
+					render: 'percentage',
+					fontColor: 'white',
+					fontSize: 14,
+				},
+				tooltips: false,
+				layout: {
+					padding: {
+						left: 20,
+						right: 20,
+						top: 20,
+						bottom: 20
+					}
+				}
+			}
+		})
+
+		
+
+		
+	
+		var myBarChart = new Chart(barChart, {
+			type: 'bar',
+			data: {
+				labels: {{ labelsod|safe }},
+				datasets : [{
+					label: "",
+					backgroundColor: 'rgb(23, 125, 255)',
+					borderColor: 'rgb(23, 125, 255)',
+					data: {{ frequenciesod|safe }},
+				}],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+
+
+		
+
+		var myBarChart2 = new Chart(barChart2, {
+			type: 'bar',
+			data: {
+				labels: ['Hommes', 'Femmes'],
+				datasets : [
+				{
+					label: "Nouveau Patient",
+					backgroundColor: 'rgb(75, 192, 19)',
+					borderColor: 'rgb(23, 125, 255)',
+					data: [{{ nouveau_malade_homme }}, {{ nouveau_malade_femme }}],
+				},
+				{
+					label: "Ancien Patient",
+					backgroundColor: 'rgb(23, 125, 255)',
+					borderColor: 'rgb(23, 125, 255)',
+					data: [{{ ancien_malade_homme }}, {{ ancien_malade_femme }}],
+				}
+			
+				],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+
+
+		var myBarChart3 = new Chart(barChart3, {
+			type: 'bar',
+			data: {
+				labels: ['Acuite Visuel Oeil Droit', 'Acuite Visuel Oeil Gauche '],
+				datasets : [
+				{
+					label: "Minimum",
+					backgroundColor: 'rgb(255, 165, 0)',
+					borderColor: 'rgb(255, 165, 0)',
+					data:  [{{ Acuite_visual_data_od.min_visual_acuity|safe }},{{ Acuite_visual_data_og.min_visual_acuity|safe }}],
+				},
+				{
+					label: "Moyenne",
+					backgroundColor: 'rgb(139, 69, 19)',
+					borderColor: 'rgb(39, 69, 19)',
+					data:  [{{ Acuite_visual_data_od.avg_visual_acuity|safe }},{{ Acuite_visual_data_og.avg_visual_acuity|safe }}],
+				},
+				{
+					label: "Maximum",
+					backgroundColor: 'rgb(255, 192, 203)',
+					borderColor: 'rgb(255, 192, 203)',
+					data:  [{{ Acuite_visual_data_od.max_visual_acuity|safe }},{{ Acuite_visual_data_og.max_visual_acuity|safe }}],
+				},
+				
+			
+				],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+
+
+		var myBarChart4 = new Chart(barChart4, {
+			type: 'horizontalBar',
+			data: {
+				labels: ['PIO Oeil Droit', 'PIO Oeil Gauche'],
+				datasets : [
+				{
+					label: "Minimum",
+					backgroundColor: 'rgb(45, 12, 16)',
+					borderColor: 'rgb(45, 12, 16)',
+					data:  [{{ PIO_od.min_pio|safe }},{{ PIO_og.min_pio|safe }}],
+				},
+				{
+					label: "Moyenne",
+					backgroundColor: 'rgb(255, 85, 63)',
+					borderColor: 'rgb(255,85,63)',
+					data:  [{{ PIO_od.avg_pio|safe }},{{ PIO_og.avg_pio|safe }}],
+				},
+				{
+					label: "Maximum",
+					backgroundColor: 'rgb(200, 100, 100)',
+					borderColor: 'rgb(200, 100, 100)',
+					data:  [{{ PIO_od.max_pio|safe }},{{ PIO_og.max_pio|safe }}],
+				},
+				
+			
+				],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+		var myBarChart5 = new Chart(barChart5, {
+			type: 'horizontalBar',
+			data: {
+				labels: ["OEIL GAUCHE","OEIL DROIT"],
+				datasets : [
+				{
+					label: "Tyndall 0",
+					backgroundColor: 'rgb(45, 12, 16)',
+					borderColor: 'rgb(45, 12, 16)',
+					data:  [{{ tyndall0og|safe }},{{ tyndall0od|safe }}],
+				},
+				{
+					label: "Tyndall 0-1+",
+					backgroundColor: 'rgb(135,206,235)',
+					borderColor: 'rgb(135,206,235)',
+					data:  [{{ tyndall0_1og|safe }},{{ tyndall0_1od|safe }}],
+				},
+				{
+					label: "Tyndall 1+",
+					backgroundColor: 'rgb(255, 51, 51)',
+					borderColor: 'rgb(255,51,51)',
+					data:  [{{ tyndall1og|safe }},{{ tyndall1od|safe }}],
+				},
+				{
+					label: "Tyndall 2+",
+					backgroundColor: 'rgb(255, 255, 51)',
+					borderColor: 'rgb(255,255,51)',
+					data:  [{{ tyndall2og|safe }},{{ tyndall2od|safe }}],
+				},
+				{
+					label: "Tyndall 3+",
+					backgroundColor: 'rgb(155, 200, 57)',
+					borderColor: 'rgb(155, 200, 57)',
+					data:  [{{ tyndall3og|safe }},{{ tyndall3od|safe }}],
+				},
+				{
+					label: "Tyndall 4+",
+					backgroundColor: 'rgb(0, 28, 63)',
+					borderColor: 'rgb(0, 28, 63)',
+					data:  [{{ tyndall4og|safe }},{{ tyndall4od|safe }}],
+				},
+				
+			
+				],
+			},
+			options: {
+				responsive: true, 
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+
+		
+
+
+
+		Circles.create({
+			id:'circles-2',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:10,
+			text: 36,
+			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-3',
+			radius:45,
+			value:40,
+			maxValue:100,
+			width:7,
+			text: 12,
+			colors:['#f1f1f1', '#F25961'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		
+		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+	</script>
+
+{% endblock javascripts %}
