@@ -1087,18 +1087,18 @@ from django.db import connection
 def affichertout(request):
      with connection.cursor() as cursor:
         cursor.execute(""" SELECT i.* ,o.*,ate.*,e.*,em.*,d.*,tr.*
-FROM detthah6r4ghca.home_identification i 
-LEFT JOIN detthah6r4ghca.home_observation o
+FROM home_identification i 
+LEFT JOIN home_observation o
 ON i.numerodossier = o.obsnumdoss
-LEFT JOIN detthah6r4ghca.home_antecedent ate
+LEFT JOIN home_antecedent ate
 ON i.numerodossier = ate.atcdnumdoss
-LEFT JOIN detthah6r4ghca.home_enquete_system e
+LEFT JOIN home_enquete_system e
 ON i.numerodossier = e.es_num_doss
-LEFT JOIN detthah6r4ghca.home_exam em 
+LEFT JOIN home_exam em 
 ON i.numerodossier = em.examnumdoss
-LEFT JOIN detthah6r4ghca.home_diagnostique d
+LEFT JOIN home_diagnostique d
 ON i.numerodossier = d.diagnumdoss
-LEFT JOIN detthah6r4ghca.home_traitement tr
+LEFT JOIN home_traitement tr
 ON i.numerodossier = tr.traitnumdoss; """)
         results = cursor.fetchall()
         context = {'results':results}
