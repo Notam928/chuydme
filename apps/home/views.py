@@ -80,18 +80,22 @@ def index(request):
         propor_homme_nc = (nombre_hommes/identification_count)*100
         propor_femme_nc = (nombre_femmes/identification_count)*100
     else:
-        propor_homme = round((nombre_Homme/identification_count)*100,2)
-        propor_femme = round((nombre_Femme/identification_count)*100,2)
-        propor_homme_nc = round((nombre_hommes/identification_count)*100,2)
-        propor_femme_nc = round((nombre_femmes/identification_count)*100,2)
+        propor_homme = round(float(nombre_Homme/identification_count)*100,2)
+        propor_femme = round(float(nombre_Femme/identification_count)*100,2)
+        propor_homme_nc = round(float(nombre_hommes/identification_count)*100,2)
+        propor_femme_nc = round(float(nombre_femmes/identification_count)*100,2)
         
     total_suivi = Traitement.objects.filter(suivi_maladie='Oui').count()
     total_evo = Traitement.objects.filter(ccl='Evolution Favorable').count()
     total_diag= Diagnostique.objects.all().count()
     average_age_man_dict = Identification.objects.filter(genre='Homme').aggregate(Avg('age'))
-    average_age_man = round(average_age_man_dict["age__avg"],2)
+    if average_age_man_dict["age__avg"] == "":
+        average_age_man_dict["age__avg"] = 0
+        average_age_man = round(float(average_age_man_dict["age__avg"]),2)
     average_age_woman_dict = Identification.objects.filter(genre='Femme').aggregate(Avg('age'))
-    average_age_woman = round(average_age_woman_dict["age__avg"],2)
+    if average_age_woman_dict["age__avg"] == "":
+        average_age_woman_dict["age__avg"] = 0
+        average_age_woman = round(float(average_age_woman_dict["age__avg"]),2)
     
     atcd_avc = Antecedent.objects.filter(atcdfamavc='Presence AVC').count()
     atcd_diab = Antecedent.objects.filter(atcdfamdiab='Presence Diabete').count()
