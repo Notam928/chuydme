@@ -1,0 +1,647 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Predictions{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li> 
+					<li class="nav-item">
+						<a href="#">PREDICTION DES MALADIES OCULAIRES</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">SIMULER LA DETECTION D'UNE MALADIE OCULAIRE</a>
+					</li>
+				</ul>
+			</div>
+			  
+			<div class="row">
+				<div class="col-md-10">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title" style="color:#008000;font-size:25px;"><b>PREDICTION DES MALADIES OCULAIRES</b></div>
+						</div>
+						<form class="form-horizontal" action="predict" method="POST" id="form">
+							{% csrf_token %}
+							 
+							<div class="card-body">
+								<h2 style="color:red;font-size:20px;"><b>{{ result }}</b></h2>
+								<div class="row">
+									
+									<div class="col-md-6 col-lg-6">
+										
+                                        
+
+										<div class="form-group">
+											<label for="identification">GENRE</label><br>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Genre" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Femme</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Genre" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Homme</span>
+												</label>
+											</div>
+											
+										</div>
+
+
+										<div class="form-group">
+											<label>ATCD-AVC</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-AVC" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">AVC Present</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-AVC" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">AVC Absent</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-AVC" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										<div class="form-group">
+											<label>ATCD-Glaucome</label><br/>
+											<select class="form-control" id="ATCD-glaucome" name="ATCD-glaucome" required>
+												<option selected>--------------</option>
+												<option value=1>Glaucome Present</option>
+												<option value=2>Glaucome Absent</option>
+												<option value=3>Aucun</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>CHAMBRE ANTERIEURE</label><br/>
+											<select class="form-control" id="Chambre Anterieure" name="Chambre Anterieure" required>
+												<option selected>--------------</option>
+												<option value=1>Calme et Profonde</option>
+												<option value=2>Tyndall 0-1</option>
+												<option value=4>Tyndall 2+</option>
+												<option value=3>Aucun</option>
+											</select>
+										</div>
+
+										
+
+
+										<div class="form-group">
+											<label>Fond d'oeil</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Retine OG" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Normale</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Retine OG" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Anormal</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Retine OG" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										
+
+										<div class="form-group">
+											<label>ASTHME</label><br/>
+											<select class="form-control" id="ASTHME" name="ASTHME" required>
+												<option selected>--------------</option>
+												<option  value=1>Asthme Present</option>
+												<option value=2>Asthme Absent</option>
+												<option value=3>Aucun</option>
+												
+											</select>
+										</div> 
+
+										<div class="form-group">
+											<label>Region d'Origine</label>
+											<select class="form-control" id="Region d'origine" name="Region d'origine" required>
+												<option selected>Choisir la region</option>
+												<option value=1>Extreme Nord</option>
+												<option value=2>Nord</option>
+												<option value=3>Adamaoua</option>
+												<option value=4>Littoral</option>
+												<option value=9>Ouest</option>
+												<option value=6>Nord Ouest</option>
+												<option value=7>Centre</option>
+												<option value=10>Est</option>
+												<option value=8>Sud</option>
+												<option value=5>Sud Ouest</option>
+											</select>
+										</div>
+										
+										<div class="form-group">
+											<label>Douleur Enquetes Systematique</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-DOULEUR" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Normal</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-DOULEUR" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Anormal</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-DOULEUR" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										
+
+										<div class="form-group">
+											<label>CRISTALLIN</label><br/>
+											<select class="form-control" id="Cristallin OG" name="Cristallin OG" required>
+												<option selected>--------------</option>
+												<option  value=1>Transparent</option>
+												<option value=2>Opacifie</option>
+												<option value=3>Aucun</option>
+												
+											</select>
+										</div> 
+										<div class="form-group">
+											<label>PAPILLE</label><br/>
+											<select class="form-control" id="Papille ODG" name="Papille ODG" required>
+												<option selected>--------------</option>
+												<option value=1>Normale</option>
+												<option value=2>Pal</option>
+												<option value=4>Escavee</option>
+											    <option value=3>Aucun</option>
+											</select>
+										</div> 
+										<div class="form-group">
+											<label>MACULA</label><br/>
+											<select class="form-control" id="Macula ODG" name="Macula ODG" required>
+												<option selected>--------------</option>
+												<option value=1>Normale</option>
+												<option value=2>Ternie</option>
+												<option value=4>Druse</option>
+											    <option value=3>Aucun</option>
+											</select>
+										</div> 
+										<div class="form-group">
+											<label>INSPECTION</label><br/>
+											<select class="form-control" id="Inspection" name="Inspection" required>
+												<option selected>--------------</option>
+												<option value=1>Normale</option>
+												<option value=2>Anormal</option>
+											    <option value=3>Aucun</option>
+											</select>
+										</div> 
+
+										<div class="form-group">
+											<label>PICOTEMENTS</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-PICCOTEMENTS" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Picotements Presente</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-PICCOTEMENTS" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Picotements Absent</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-PICCOTEMENTS" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label for="identification">AXE(En Degré )</label>
+											<input type="number" class="form-control"  id="Axe OG" name="Axe OG" placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">SPHERE(En Dioptrie )</label>
+											<input type="number" class="form-control" step=0.01 id="Sphere OG" name="Sphere OG" placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+										<div class="form-group">
+											<label for="identification">Pression Intra-oculaire OG(mm Hg)</label>
+											<input type="number" class="form-control"  id="Pression Intra-Oculaire OG" name="Pression Intra-Oculaire OG" placeholder="Entrez la valeur de l'axe">
+											
+										</div>
+										<div class="form-group">
+											<label>AGE</label>
+											<select class="form-control" id="Age" name="Age" required>
+												<option>Choisir L'Age</option>
+												<option value=1>1</option>
+												<option value=2>2</option>
+												<option value=3>3</option>
+												<option value=4>4</option>
+												<option value=5>5</option>
+												<option value=6>6</option><option value=7>7</option><option value=8>8</option><option value=9>9</option><option value=10>10</option>
+												<option value=11>11</option><option value=12>12</option><option value=13>13</option><option value=14>14</option><option value=15>15</option>
+												<option value=16>16</option><option value=17>17</option><option value=18>18</option><option value=19>19</option><option value=20>20</option>
+												<option value=21>21</option><option value=22>22</option><option value=23>23</option><option value=24>24</option><option value=25>25</option>
+												<option value=26>26</option><option value=27>27</option><option value=28>28</option><option value=29>29</option>
+												<option value=30>30</option><option value=31>31</option><option value=32>32</option><option value=33>33</option ><option value=34>34</option>
+												<option value=35>35</option><option value=36>36</option><option value=37>37</option><option value=38>38</option><option value=39>39</option>
+												<option value=40>40</option><option value=41>41</option><option value=42>42</option><option value=43>43</option><option value=44>44</option>
+												<option value=45>45</option><option value=46>46</option><option value=47>47</option><option value=48>48</option>
+												<option value=49>49</option><option value=50>50</option><option value=51>51</option><option value=52>52</option><option value=53>53</option>
+												<option value=54>54</option><option value=55>55</option><option value=56>56</option><option value=57>57</option><option value=58>58</option>
+												<option value=59>59</option><option value=60>60</option><option value=61>61</option><option value=62>62</option><option value=63>63</option>
+												<option value=64>64</option><option value=65>65</option><option value=66>66</option><option value=67>67</option><option value=68>68</option>
+												<option value=69>69</option><option value=70>70</option><option value=71>71</option><option value=72>72</option><option value=73>73</option>
+												<option value=74>74</option><option value=75>75</option><option value=76>76</option><option value=77>77</option><option value=78>78</option>
+												<option value=79>79</option><option value=80>80</option><option value=81>81</option><option value=82>82</option><option value=83>83</option>
+												<option value=84>84</option><option value=85>85</option><option value=86>86</option><option value=87>87</option><option value=86>86</option>
+												<option value=88>88</option><option value=89>89</option><option value=90>90</option><option value=91>91</option>
+												<option value=92>92</option><option value=93>93</option><option value=94>94</option><option value=95>95</option><option value=96>96</option>
+												<option value=97>97</option><option value=98>98</option><option value=99>99</option><option value=100>100</option>
+												<option value=101>101</option><option value=102>102</option><option value=103>103</option><option value=104>104</option><option value="105">105</option>
+												<option value=106>106</option><option value=107>107</option><option value=108>108</option><option value=109>109</option><option value="110">110</option>
+											</select>
+										</div>
+										
+										
+
+										
+										
+										
+									
+									</div>
+								    
+									<div class="col-md-6 col-lg-6">
+										<div class="form-group">
+											<label>IRIS</label><br/>
+											<select class="form-control" id="Iris OG" name="Iris OG" required>
+												<option selected>--------------</option>
+												<option value=1>Normopigmentée</option>
+												<option value=2>Hypopigmentée</option>
+												<option value=4>Hyperpigmentée</option>
+												<option value=3>Aucun</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>ATCD-FUMEUR</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FUMEUR" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Fumeur</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FUMEUR" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Non Fumeur</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FUMEUR" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										<div class="form-group">
+											<label>ATCD-HTA</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-HTA" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">HTA Present</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-HTA" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">HTA Absent</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-HTA" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										
+									
+
+										<div class="form-group">
+											<label>PUPILLE</label><br/>
+											<select class="form-control" id="Pupil OG" name="Pupil OG" required>
+												<option selected>--------------</option>
+												<option value=1>Forme Irreguliere</option>
+												<option value=2>Forme Ronde et Centree</option>
+												<option value=3>Forme Ronde et Centree,RFM(+)</option>
+												<option value=4>Aucun</option>
+												<option value=5>RAS</option>
+												<option value=6>RFM(-)</option>
+												<option value=7>RFM(+)</option>
+											</select>
+										</div>
+
+
+
+										<div class="form-group">
+											<label>ATCD-FEUX DE BOIS</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FEUX DE BOIS" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Exposition Feux de Bois</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FEUX DE BOIS" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Non Exposition Feux de Bois</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ATCD-FEUX DE BOIS" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>FLOU VISUEL</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-FLOU-VISUEL" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Flou Visuel</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-FLOU-VISUEL" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Pas de Flou Visuel</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-FLOU-VISUEL" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+
+
+
+										<div class="form-group">
+											<label>PROFESSION</label><br/>
+											<select class="form-control" id="Profession" name="Profession" required>
+												<option selected>--------------</option>
+												<option value=1>Institutrice</option>
+												<option value=2>Coiffeur</option>
+												<option value=3>Commercant</option>
+												<option value=4>Eleve</option>
+												<option value=5>Housewife</option>
+												<option value=6>Chauffeur</option>
+												<option value=7>Journaliste</option>
+												<option value=8>Agriculteur</option>
+												<option value=9>Aide-soignante</option>
+												<option value=10>Assistante Affaire Social</option>
+												<option value=11>Avocat</option>
+												<option value=12>Nouveau Nee</option>
+												<option value=13>Cadre</option>
+												<option value=14>Caissier</option>
+												<option value=15>Comptable</option>
+												<option value=16>Couturier</option>
+												<option value=17>Debrouillard</option>
+												<option value=18>Documentaliste</option>
+												<option value=19>Economiste</option>
+												<option value=20>Electronicien</option>
+												<option value=21>Enseignant</option>
+												<option value=22>Etudiant</option>
+												<option value=23>Infirmier</option>
+												<option value=24>Ingenieur</option>
+												<option value=25>Medecin</option>
+												<option value=26>Menagere</option>
+												<option value=27>Physiotherapeute</option>
+												<option value=28>Agent Commercial</option>
+												<option value=29>Gendarme/Militaire</option>
+												<option value=30>Menusier</option>
+												<option value=31>Retraite</option>
+												<option value=32>Macon</option>
+												<option value=33>Elec Auto</option>
+												<option value=34>Jardinier</option>
+												<option value=35>Informaticien</option>
+												<option value=36>Magistrat</option>
+												<option value=37>Teleconseiller</option>
+												<option value=38>Secretaire</option>
+												<option value=39>Pastiere</option>
+												<option value=40>Imprimeur</option>
+												<option value=41>Geometre</option>
+												<option value=42>Professeur d'universite</option>
+												<option value=43>Huissier</option>
+												<option value=44>Technicien</option>
+											</select>
+										</div>
+
+
+										<div class="form-group">
+											<label>VITRE</label><br/>
+											<select class="form-control" id="Vitre OG" name="Vitre OG" required>
+												<option selected>--------------</option>
+												<option value=1>Normal</option>
+												<option value=2>Trouble</option>
+												<option value=3>Transparent</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>LARMOIEMENTS</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-LARMOIEMENT" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Larmoiement Present</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-LARMOIEMENT" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Larmoiement Absente</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-LARMOIEMENT" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+										<div class="form-group">
+											<label>SENSATION DE GRAINS DE SABLE</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-SENS-GRAINS" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Sensation de grains de sable Present</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-SENS-GRAINS" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Sensation de grains de sable Absente</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-SENS-GRAINS" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+
+
+										<div class="form-group">
+											<label>ES-CÉPHALÉES</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox"  name="ES-CEPHALÉES" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Céphalée  Present</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox"  name="ES-CEPHALÉES" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Céphalée  Absente</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="ES-CEPHALÉES" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">Aucun</span>
+												</label>
+	
+											</div>
+										</div>
+
+										
+
+										
+
+										 
+										<div class="form-group">
+											<label for="identification">ACUITÉ VISUEL(Sur 10)</label>
+											<input type="number" class="form-control" id="Acuite visuel OG" name="Acuite visuel OG" placeholder="Entrez l'acuite visuel ">
+											
+										</div>
+
+                                        <div class="form-group">
+											<label for="identification">CYLINDRE(En Dioptrie)</label>
+											<input type="number" class="form-control" step=0.01 id="Cylindre OG" name="Cylindre OG" placeholder="Entrez la valeur du cylindre">
+											
+										</div>
+										
+
+										<div class="form-group">
+											<label for="identification"><b style="color:#f35961">OCT<b></label><br>
+											<label for="identification">CD Valeur (en mm)</label>
+											<input type="number" class="form-control" step=0.01 id="Taille Papille(C|D)" name="Taille Papille(C|D)" placeholder="Entrez la taille de la papille">
+	
+										</div>
+										
+										
+
+										<div class="form-group">
+											<label>REFLETS CORNÉENS</label><br/>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Reflets" value=1 class="selectgroup-input" >
+													<span class="selectgroup-button">Centrées</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Reflets" value=2 class="selectgroup-input">
+													<span class="selectgroup-button">Non Centrées</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="Reflets" value=3 class="selectgroup-input">
+													<span class="selectgroup-button">RAS</span>
+												</label>
+	
+											</div>
+										</div>
+
+										
+
+									
+										
+									
+                                        
+										
+										
+                                        
+
+										
+                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+										
+									</div>
+					                
+									
+								</div>
+							</div>
+						<div class="card-action">
+							<button class="btn btn-success">PREDIRE</button>
+						</div>
+						
+						 
+	
+						 
+					</form>
+					
+					
+						
+					
+						
+						  <!-- Rest of your content goes here -->
+					
+				</div>
+			</div>
+              
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	
+	<script src="/static/assets/js/jspdf.umd.min.js"></script>
+	
+	
+
+{% endblock javascripts %}
