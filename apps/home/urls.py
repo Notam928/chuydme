@@ -45,6 +45,7 @@ urlpatterns = [
     url('updatetraitement/<int:id>', views.updatetraitement, name='updatetraitement'), 
     url('deletetraitement/<int:id>', views.deletetraitement, name='deletetraitement'),
     url('affichertout', views.affichertout, name='affichertout'),
+    url('predict', views.predict_chances, name='predict'),
    
    
    
