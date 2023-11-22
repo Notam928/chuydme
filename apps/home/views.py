@@ -1080,7 +1080,76 @@ def deletetraitement(request,id):
     obj = get_object_or_404(Traitement, id=id)
     obj.delete()
     return redirect('/listtraitement')
+    
+    
+@login_required(login_url="/login/")
+def predict_chances(request):
+    import pandas as pd
+    import pickle 
+    if request.method == 'POST':
 
+        # Receive data from client
+        Genre = int(request.POST.get('Genre'))
+        ATCD_HTA = int(request.POST.get('ATCD-HTA'))
+        ATCD_AVC= int(request.POST.get('ATCD-AVC'))
+        ATCD_FUMEUR = int(request.POST.get('ATCD-FUMEUR'))
+        ATCD_glaucome = int(request.POST.get('ATCD-glaucome'))
+        ES_SENS_GRAINS = int(request.POST.get('ES-SENS-GRAINS'))
+        Chambre_Anterieure = int(request.POST.get('Chambre Anterieure'))
+        Pupil_OG = int(request.POST.get('Pupil OG'))
+        Retine_OG = int(request.POST.get('Retine OG'))
+        ATCD_FEUX_DE_BOIS = int(request.POST.get('ATCD-FEUX DE BOIS'))
+        ASTHME = int(request.POST.get('ASTHME'))
+        Vitre_OG = int(request.POST.get('Vitre OG'))
+        Region_origine = int(request.POST.get("Region d'origine"))
+        Iris_OG = int(request.POST.get("Iris OG"))
+        ES_DOULEUR = int(request.POST.get('ES-DOULEUR'))
+        ES_FLOU_VISUEL = int(request.POST.get('ES-FLOU-VISUEL'))
+        Cristallin_OG = int(request.POST.get('Cristallin OG'))
+        Profession = int(request.POST.get("Profession"))
+        Papille_ODG = int(request.POST.get("Papille ODG"))
+        ES_LARMOIEMENT = int(request.POST.get('ES-LARMOIEMENT'))
+        Inspection = int(request.POST.get('Inspection'))
+        ES_CEPHALEES = int(request.POST.get("ES-CEPHALÉES"))
+        Picotements = int(request.POST.get("ES-PICCOTEMENTS"))
+        Reflets = int(request.POST.get('Reflets'))
+        Macula_ODG = int(request.POST.get('Macula ODG'))
+        Age = int(request.POST.get('Age'))
+        AxeOG = float(request.POST.get('Axe OG'))
+        Cylindre_OG = float(request.POST.get('Cylindre OG'))
+        Sphere_OG = float(request.POST.get('Sphere OG'))
+        Taille_Papille = float(request.POST.get('Taille Papille(C|D)'))
+        PIOG = float(request.POST.get('Pression Intra-Oculaire OG'))
+        AVOG = float(request.POST.get('Acuite visuel OG'))
+        
+
+        # Unpickle model
+        model = pickle.load(open("modelmaladieoculaires.pkl", 'rb'))
+        # Make prediction
+        result = model.predict([[Genre,ATCD_HTA,ATCD_AVC,ATCD_FUMEUR,ATCD_glaucome,ES_SENS_GRAINS,Chambre_Anterieure,Pupil_OG,Retine_OG,ATCD_FEUX_DE_BOIS,ASTHME,Vitre_OG,Region_origine,Iris_OG,ES_DOULEUR,ES_FLOU_VISUEL,Cristallin_OG,Profession,Papille_ODG,ES_LARMOIEMENT,Inspection,ES_CEPHALEES,Picotements,Reflets,Macula_ODG,Age,AxeOG,Cylindre_OG,Sphere_OG,Taille_Papille,PIOG,AVOG]])
+        if result[0] == 0:
+            result = "PREDICTION: ça pourrait être un cas <<d’amétropie>>"
+        elif result[0] == 1:
+            result = 'PREDICTION: Ça pourrait-être un cas de <<Glaucome>>'
+        elif result[0] == 2:
+            result = 'PREDICTION: Ça pourrait-être un cas de <<DMLA>>'
+        elif result[0] == 3:
+            result = 'PREDICTION: Ça pourrait-être un cas de <<Cataracte>>'
+        elif result[0] == 4:
+            result = 'PREDICTION: Ça pourrait-être un cas de <<Sécheresse Oculaire>>'
+        elif result[0] == 5:
+            result = "PREDICTION: Ça pourrait-être un cas <<d’uvéite>>"
+        elif result[0] == 6:
+            result = 'PREDICTION: Ça pourrait-être un cas de <<Rétinopathie>>'
+        elif result[0] == 7:
+            result = "PREDICTION: Ça pourrait-être un cas <<d'infection oculaire>>"
+        elif result[0] == 8:
+            result = "PREDICTION: Ça pourrait-être un cas de <<CO>>"
+        
+        
+        return render(request,'home/Prediction.html',{'result':result})
+    
+    return render(request,'home/Prediction.html')
 
 from django.db import connection
 @login_required(login_url="/login/")
