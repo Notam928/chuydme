@@ -1,4 +1,4 @@
-		<!-- Sidebar -->
+			<!-- Sidebar -->
 		<div class="sidebar sidebar-style-2" data-background-color="dark2">	
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
@@ -194,6 +194,13 @@
 							<a href="{% url 'affichertout' %}">
 								<i class="fas  fa-info-circle"></i>
 								<p>Information Consolider</p>
+								
+							</a>
+						</li>
+						<li class="nav-item {% if 'Predict' in request.path %} active {% endif %}">
+							<a href="{% url 'predict' %}">
+								<i class="fas fa-bullseye"></i>
+								<p>Prediction</p>
 								
 							</a>
 						</li>
